@@ -7,10 +7,12 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
-                    <p>Selamat datang</p>
+                    <p>Tambah transaksi baru</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@endpush

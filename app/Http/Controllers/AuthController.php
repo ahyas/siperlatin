@@ -8,6 +8,7 @@ use Validator;
 use Hash;
 use Session;
 use DB;
+use Redirect;
 
 class AuthController extends Controller
 {
@@ -16,6 +17,7 @@ class AuthController extends Controller
             //Login Success
             return redirect()->route('home');
         }
+        
         return view('auth/login');
     }
 
@@ -47,7 +49,8 @@ class AuthController extends Controller
  
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
             //Login Success
-            return redirect()->route('home');
+            //Kunjungi halaman yang sebelumnya ingin dikunjungi
+            return Redirect::intended('home');
  
         } else { // false
  
