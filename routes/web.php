@@ -40,4 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("barang/{id_barang}/hapus","BarangController@hapus")->name("barang.hapus");
     Route::get("barang/{id_barang}/edit", "BarangController@edit")->name("barang.edit");
     Route::post("barang/{id_barang}/update", "BarangController@update")->name("barang.update");
+    Route::get("barang/{id_barang}/detail","BarangController@detail")->name("barang.detail");
+    Route::get("barang/{id_barang}/detail/tambah","BarangController@tambah_detail")->name("barang.detail.tambah");
+    Route::post("barang/{id_barang}/detail/simpan","BarangController@simpan_detail")->name("barang.detail.simpan");
+    Route::get("barang/{id_barang}/detail/{id_detail}/edit", "BarangController@edit_detail")->name("barang.detail.edit");
 });

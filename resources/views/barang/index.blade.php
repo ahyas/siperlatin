@@ -14,7 +14,8 @@
                             <tr>
                                 <th>Kode barang</th>
                                 <th>Nama barang</th>
-                                <th>Aksi</th>
+                                <th align="center">Jumlah barang</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -22,7 +23,9 @@
                             <tr>
                                 <td>{{$row->kode}}</td>
                                 <td>{{$row->nama}}</td>
-                                <td><button class="btn btn-primary btn-sm edit" data-id="{{$row->id}}">Edit</button> <button class="btn btn-danger btn-sm delete" data-id="{{$row->id}}">Delete</button></td>
+                                <td align="center">{{$row->jumlah_detail_barang}}</td>
+                                <?php if($row->jumlah_detail_barang==0){$disabled="";}else{$disabled="disabled";} ?>
+                                <td align="right"><button class="btn btn-primary btn-sm edit" data-id="{{$row->id}}">Edit</button> <button class="btn btn-success btn-sm detail" data-id="{{$row->id}}">Detail</button> <button class="btn btn-danger btn-sm delete" data-id="{{$row->id}}" <?php echo $disabled; ?>>Delete</button></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -53,6 +56,12 @@
             if(window.confirm("Anda yakin ingin menghapus data ini?")){
                 window.location.href = "barang/"+id_barang+"/hapus";
             }
+        });
+
+        $("body").on("click",".detail",function(){
+            var id_barang = $(this).data("id");
+            console.log("Detail ",id_barang);
+            window.location.href  ="barang/"+id_barang+"/detail";
         });
     });
 </script>

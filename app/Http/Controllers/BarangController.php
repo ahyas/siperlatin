@@ -8,8 +8,14 @@ use DB;
 class BarangController extends Controller
 {
     public function index(){
-        $table=DB::table("tb_barang")->paginate(10);
+        //$table=DB::table("tb_barang")->paginate(10);
         
+        $table = DB::table("tb_barang")
+        ->select("tb_barang.id","tb_barang.kode","tb_barang.nama", DB::raw("count(tb_detail_barang.id_barang) as jumlah_detail_barang"))
+        ->leftJoin("tb_detail_barang","tb_barang.id","=","tb_detail_barang.id_barang")
+        ->groupBy("tb_barang.id","tb_barang.kode","tb_barang.nama","tb_detail_barang.id_barang")
+        ->paginate(10);
+
         return view("barang/index", ["table"=>$table]);
     }
 
@@ -26,12 +32,56 @@ class BarangController extends Controller
         return view("barang/view", compact("table", "transaksi","count"));
     }
 
+    public function detail($id_barang){
+        $table=DB::table("tb_barang")
+        ->where("id",$id_barang)
+        ->first();
+        
+        $count_detail=DB::table("tb_detail_barang")
+        ->where("id_barang", $id_barang);
+
+        if($count_detail->count() > 0){
+            $info="";
+            $detail = DB::table("tb_detail_barang")->where("id_barang",$id_barang)->get();
+        }else{
+            $info="Belum ada detail barang";
+            $detail = DB::table("tb_detail_barang")->where("id_barang",$id_barang)->get();
+        }
+
+        return view("barang/detail/index", compact("table","detail","info"));
+    }
+
     public function tambah($kode){
         $barang = DB::table("tb_barang")
         ->where("kode", $kode)
         ->first();
 
         return view("barang/transaksi", compact("kode","barang"));
+    }
+
+    public function tambah_detail($id_barang){
+        $table=DB::table("tb_barang")
+        ->where("id",$id_barang)
+        ->first();
+
+        $last_id=DB::table("tb_detail_barang")
+        ->where("id_barang",$id_barang)
+        ->count();
+
+        $kode = $table->kode.".".($last_id+1);
+
+        return view("barang/detail/new", compact("kode","table"));
+    }
+
+    public function simpan_detail(Request $request, $id_barang){
+        DB::table("tb_detail_barang")
+        ->insert([
+            "id_barang"=>$id_barang,
+            "kode"=>$request["kode_barang"],
+            "nama"=>$request["nama_barang"]
+        ]);
+
+        return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
     }
 
     public function tambah_barang(){
@@ -59,7 +109,11 @@ class BarangController extends Controller
         ->where("id",$id_barang)
         ->first();
 
-        return view("barang/edit", compact("table"));
+        $count = DB::table("tb_detail_barang")
+        ->where("id_barang",$id_barang)
+        ->count();
+
+        return view("barang/edit", compact("table","count"));
     }
 
     public function update(Request $request, $id_barang){
