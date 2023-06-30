@@ -73,17 +73,6 @@ class BarangController extends Controller
         return view("barang/detail/new", compact("kode","table"));
     }
 
-    public function simpan_detail(Request $request, $id_barang){
-        DB::table("tb_detail_barang")
-        ->insert([
-            "id_barang"=>$id_barang,
-            "kode"=>$request["kode_barang"],
-            "nama"=>$request["nama_barang"]
-        ]);
-
-        return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
-    }
-
     public function tambah_barang(){
 
         return view("barang/new");
@@ -104,6 +93,18 @@ class BarangController extends Controller
         return redirect()->route("barang.index");
     }
 
+    public function simpan_detail(Request $request, $id_barang){
+        DB::table("tb_detail_barang")
+        ->insert([
+            "id_barang"=>$id_barang,
+            "kode"=>$request["kode_barang"],
+            "nama"=>$request["nama_barang"],
+            "keterangan"=>$request["keterangan"],
+        ]);
+
+        return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
+    }
+
     public function edit($id_barang){
         $table=DB::table("tb_barang")
         ->where("id",$id_barang)
@@ -122,6 +123,7 @@ class BarangController extends Controller
         ->first();
 
         $table=DB::table("tb_detail_barang")
+        ->select("id","id_barang","nama","kode","keterangan")
         ->where("id_barang",$id_barang)
         ->where("id", $id_detail)
         ->first();
@@ -134,7 +136,8 @@ class BarangController extends Controller
         ->where("id",$id_barang)
         ->update([
             "kode"=>$request["kode_barang"],
-            "nama"=>$request["nama_barang"]
+            "nama"=>$request["nama_barang"],
+            "keterangan"=>$request["keterangan"],
         ]);
         return redirect()->route("barang.index");
     }

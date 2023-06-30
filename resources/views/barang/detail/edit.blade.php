@@ -22,6 +22,12 @@
                                 <input type="text" class="form-control" name="nama_barang" value="{{$table->nama}}">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Keterangan</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="keterangan" rows="3">{{$table->keterangan}}</textarea>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary btn-sm simpan">Update</button>
                         <button type="button" class="btn btn-danger btn-sm batal" onclick="history.back()">Batal</button>
                     </form>

@@ -11,21 +11,25 @@
                     <p style="padding-top:10px">Referensi barang: {{$table->kode}} <b>{{$table->nama}}</b></p>
                     <table class="table table-striped">
                         <tr>
+                            <th width="100px">QR Code</th>
                             <th>Kode sub barang</th>
                             <th>Nama sub barang</th>
+                            <th>Keterangan</th>
                             <th></th>
                         </tr>
                         @if($info=="")
                             @foreach($detail as $row)
                                 <tr>
+                                    <td>{!! QrCode::size(90)->generate($row->kode); !!}</td>
                                     <td>{{$row->kode}}</td>
                                     <td>{{$row->nama}}</td>
+                                    <td>{{$row->keterangan}}</td>
                                     <td align="right"><a class="btn btn-primary btn-sm" href="{{route('barang.detail.edit', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button">Edit</a> <a class="btn btn-danger btn-sm" href="{{route('barang.detail.delete', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
                                 </tr>
                             @endforeach
                         @else
                         <tr>
-                            <td colspan="3" align="center" class="table-danger">{{$info}}</td>
+                            <td colspan="4" align="center" class="table-danger">{{$info}}</td>
                         </tr>
                         @endif
                     </table>

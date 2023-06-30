@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Edit transaksi</div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('transaksi.update', ['id_transaksi'=>$id_transaksi])}}">
+                    <form method="POST" action="{{route('transaksi.update', ['id_transaksi'=>$id_transaksi])}}" enctype="multipart/form-data">
                         @csrf
                         
                         <div class="form-group row">
@@ -55,6 +55,12 @@
                             <label class="col-sm-2 col-form-label">Keterangan</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="keterangan" value="{{$tb_transaksi->keterangan}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Lampiran (PDF)</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" name="lampiran" accept=".pdf">
                             </div>
                         </div>
                         

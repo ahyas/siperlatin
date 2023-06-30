@@ -14,6 +14,7 @@
                             <th>Keterangan</th>
                             <th>Nominal</th>
                             <th>Tanggal</th>
+                            <th>Lampiran</th>
                             <th></th>
                         </tr>
                         @foreach($table as $row)
@@ -22,19 +23,21 @@
                             <td>{{$row->keterangan}}</td>
                             <td>{{$row->nominal}}</td>
                             <td>{{$row->tanggal}}</td>
+                            <td><a href="storage/files/{{$row->file_name}}" target="_blank">{{$row->file_name}}</a></td>
                             <th><button class="btn btn-primary btn-sm edit" data-id_transaksi="{{$row->kode_transaksi}}">Edit</button> <button class="btn btn-danger btn-sm delete" data-id_transaksi="{{$row->kode_transaksi}}">Hapus</button></th>
                         </tr>
                         <tr >
-                            <td colspan="5" style="padding-left:70px">
+                            <td colspan="6" style="padding-left:70px">
                                 <span><i>Detail transaksi</i></span><br>
                                 <span><b>Barang :</b> {{$row->nama_barang}}</span><br>
                                 <span><b>Sub barang :</b> {{$row->nama_sub_barang}}</span>
                             </td>
                         </tr>
                         @endforeach
-                        <tr>
+                        <tr class="table-danger">
                             <td colspan="2" align="center"><b>Total</b></td>
                             <td><b>{{$total}}</b></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                         </tr>

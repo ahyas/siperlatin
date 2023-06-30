@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Storage;
 
 class TransaksiController extends Controller
 {
     public function index(){
         $table=DB::table("tb_transaksi")
-        ->select("tb_transaksi.id as kode_transaksi","tb_transaksi.tanggal","tb_transaksi.nominal","tb_transaksi.nominal","tb_transaksi.keterangan","tb_barang.nama as nama_barang", "tb_detail_barang.nama as nama_sub_barang")
+        ->select("tb_transaksi.id as kode_transaksi","tb_transaksi.tanggal","tb_transaksi.file_name","tb_transaksi.nominal","tb_transaksi.nominal","tb_transaksi.keterangan","tb_barang.nama as nama_barang", "tb_detail_barang.nama as nama_sub_barang")
         ->join("tb_barang","tb_transaksi.id_barang","=","tb_barang.id")
         ->join("tb_detail_barang","tb_transaksi.id_sub_barang","=","tb_detail_barang.id")
         ->paginate(10);
@@ -55,20 +56,54 @@ class TransaksiController extends Controller
     }
 
     public function update(Request $request, $id_transaksi){
-        DB::table("tb_transaksi")
-        ->where("id",$id_transaksi)
-        ->update([
-            "id_barang"=>$request->barang,
-            "id_sub_barang"=>$request->sub_barang,
-            "tanggal"=>$request->tanggal,
-            "keterangan"=>$request->keterangan,
-            "nominal"=>$request->nominal
-        ]);
+        if($request->hasFile("lampiran")){
+            $previous_file = DB::table("tb_transaksi")
+            ->where("id",$id_transaksi)
+            ->select("file_name")
+            ->first();
+
+            //delete previous file
+            unlink(storage_path('files/'.$previous_file->file_name));
+
+            $fileName = time().'.'.$request->lampiran->extension();
+        
+            $tujuan_upload = storage_path('files');
+            $request->lampiran->move($tujuan_upload, $fileName);
+
+            DB::table("tb_transaksi")
+            ->where("id",$id_transaksi)
+            ->update([
+                "id_barang"=>$request->barang,
+                "id_sub_barang"=>$request->sub_barang,
+                "tanggal"=>$request->tanggal,
+                "keterangan"=>$request->keterangan,
+                "nominal"=>$request->nominal,
+                "file_name"=>$fileName
+            ]);
+        }else{
+            DB::table("tb_transaksi")
+            ->where("id",$id_transaksi)
+            ->update([
+                "id_barang"=>$request->barang,
+                "id_sub_barang"=>$request->sub_barang,
+                "tanggal"=>$request->tanggal,
+                "keterangan"=>$request->keterangan,
+                "nominal"=>$request->nominal
+            ]);
+        }
 
         return redirect()->route("transaksi.index");
     }
 
     public function delete($id_transaksi){
+        $previous_file = DB::table("tb_transaksi")
+        ->where("id",$id_transaksi)
+        ->select("file_name")
+        ->first();
+
+        //delete related file
+        unlink(storage_path('files/'.$previous_file->file_name));
+
         DB::table("tb_transaksi")
         ->where("id",$id_transaksi)
         ->delete();
@@ -86,13 +121,20 @@ class TransaksiController extends Controller
     }
 
     public function simpan(Request $request){
+     
+        $fileName = time().'.'.$request->lampiran->extension();
+        
+        $tujuan_upload = storage_path('files');
+        $request->lampiran->move($tujuan_upload, $fileName);
+
         DB::table("tb_transaksi")
         ->insert([
             "id_barang"=>$request->barang,
             "id_sub_barang"=>$request->sub_barang,
             "tanggal"=>$request->tanggal,
             "keterangan"=>$request->keterangan,
-            "nominal"=>$request->nominal
+            "nominal"=>$request->nominal,
+            "file_name"=>$fileName
         ]);
 
         return redirect()->route("transaksi.index");

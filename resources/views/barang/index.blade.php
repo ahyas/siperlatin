@@ -23,7 +23,13 @@
                             <tr>
                                 <td>{{$row->kode}}</td>
                                 <td>{{$row->nama}}</td>
-                                <td align="center">{{$row->jumlah_detail_barang}}</td>
+                                <td align="center">
+                                    @if($row->jumlah_detail_barang>0)
+                                        {{$row->jumlah_detail_barang}}
+                                    @else
+                                        <span class="badge badge-pill badge-danger">Null</span>
+                                    @endif
+                                </td>
                                 <?php if($row->jumlah_detail_barang==0){$disabled="";}else{$disabled="disabled";} ?>
                                 <td align="right"><button class="btn btn-primary btn-sm edit" data-id="{{$row->id}}">Edit</button> <button class="btn btn-success btn-sm detail" data-id="{{$row->id}}">Detail</button> <button class="btn btn-danger btn-sm delete" data-id="{{$row->id}}" <?php echo $disabled; ?>>Delete</button></td>
                             </tr>
