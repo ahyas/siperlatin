@@ -116,6 +116,19 @@ class BarangController extends Controller
         return view("barang/edit", compact("table","count"));
     }
 
+    public function edit_detail($id_barang, $id_detail){
+        $info_barang=DB::table("tb_barang")
+        ->where("id",$id_barang)
+        ->first();
+
+        $table=DB::table("tb_detail_barang")
+        ->where("id_barang",$id_barang)
+        ->where("id", $id_detail)
+        ->first();
+
+        return view("barang/detail/edit", compact("table","info_barang"));
+    }
+
     public function update(Request $request, $id_barang){
         DB::table("tb_barang")
         ->where("id",$id_barang)
@@ -126,11 +139,31 @@ class BarangController extends Controller
         return redirect()->route("barang.index");
     }
 
+    public function update_detail(Request $request, $id_barang, $id_detail){
+        DB::table("tb_detail_barang")
+        ->where("id",$id_detail)
+        ->where("id_barang", $id_barang)
+        ->update([
+            "kode"=>$request["kode_barang"],
+            "nama"=>$request["nama_barang"]
+        ]);
+        return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
+    }
+
     public function hapus($id_barang){
         DB::table("tb_barang")
         ->where("id",$id_barang)
         ->delete();
 
         return redirect()->route("barang.index");
+    }
+
+    public function delete_detail($id_barang, $id_detail){
+        DB::table("tb_detail_barang")
+        ->where("id_barang",$id_barang)
+        ->where("id",$id_detail)
+        ->delete();
+
+        return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
     }
 }

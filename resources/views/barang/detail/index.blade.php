@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header">Detail barang</div>
+                <div class="card-header">Sub barang</div>
                 <div class="card-body">
-                <button class="btn btn-danger btn-sm" style="margin-bottom:10px" onclick="history.back()">Batal</button> <button class="btn btn-primary btn-sm tambah" data-id="{{$table->id}}" style="margin-bottom:10px">Tambah</button>
-                    <p>{{$table->kode}} <b>{{$table->nama}}</b></p>
+                <a class="btn btn-danger btn-sm" href="{{route('barang.index')}}" role="button">Batal</a> <button class="btn btn-primary btn-sm tambah" data-id="{{$table->id}}">Tambah</button>
+                    <p style="padding-top:10px">Referensi barang: {{$table->kode}} <b>{{$table->nama}}</b></p>
                     <table class="table table-striped">
                         <tr>
-                            <th>Kode</th>
-                            <th>Nama</th>
+                            <th>Kode sub barang</th>
+                            <th>Nama sub barang</th>
                             <th></th>
                         </tr>
                         @if($info=="")
@@ -20,7 +20,7 @@
                                 <tr>
                                     <td>{{$row->kode}}</td>
                                     <td>{{$row->nama}}</td>
-                                    <td align="right"><button class="btn btn-primary btn-sm edit">Edit</button> <button class="btn btn-danger btn-sm delete">Delete</button></td>
+                                    <td align="right"><a class="btn btn-primary btn-sm" href="{{route('barang.detail.edit', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button">Edit</a> <a class="btn btn-danger btn-sm" href="{{route('barang.detail.delete', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
                                 </tr>
                             @endforeach
                         @else
@@ -43,11 +43,6 @@
             window.location.href = "{{route('barang.detail.tambah',['id_barang'=>$table->id])}}";
         });
 
-        $("body").on("click",".delete",function(){
-            if(window.confirm("Anda yakin ingin menghapus data ini?")){
-                console.log("delete");
-            }
-        });
     });
 </script>
 @endpush
