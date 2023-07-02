@@ -20,6 +20,6 @@ class DetailBarangController extends Controller
 
         $count = $transaksi->count();
 
-        return view("detail_barang/index", compact("table","transaksi","count"));
+        return view("detail_barang/index", compact("table","transaksi","count","id_detail_barang"));
     }
 }

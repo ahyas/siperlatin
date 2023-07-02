@@ -28,8 +28,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('home', 'HomeController@index')->name('home');
     Route::post("logout", "AuthController@logout")->name("logout");
 
-    Route::get("test","HomeController@test")->name("test");
-
     Route::get("barang/transaksi","TransaksiController@index")->name("barang.transaksi.index");
     Route::get("barang/transaksi/tambah","TransaksiController@index")->name("barang.transaksi.index");
     Route::get("barang/{kode}/transaksi","BarangController@tambah")->name("barang.transaksi.tambah");

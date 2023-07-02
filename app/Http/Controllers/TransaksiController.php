@@ -137,6 +137,7 @@ class TransaksiController extends Controller
             "file_name"=>$fileName
         ]);
 
-        return redirect()->route("transaksi.index");
+        //return redirect()->route("transaksi.index");
+        return redirect()->back();
     }
 }

@@ -26,12 +26,13 @@
                                 <p>{{$table->keterangan}}</p>
                             </td>
                             <td width="90px">
-                                {!! QrCode::size(90)->generate($table->kode_detail_barang); !!}
+                                <?php $url = "siperlatin.pta-papuabarat/detail_barang/".$id_detail_barang; ?>
+                                {!! QrCode::size(90)->generate($url); !!}
                             </td>
                         </tr>
                     </table>
                     <p><b>History perawatan</b></p>
-                    <button class="btn btn-primary btn-sm tambah">Tambah</button>
+                    
                     <table class="table">
                         <tr>
                             <th>Tanggal</th>
@@ -54,6 +55,7 @@
                             @endforeach
                         @endif
                     </table>
+                    
                 </div>
             </div>
         </div>
@@ -65,9 +67,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $("body").on("click",".tambah",function(){
-            window.location.href = "{{route('transaksi.tambah')}}";
-        });
+        
     });
 </script>
 @endpush

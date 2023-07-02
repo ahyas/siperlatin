@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header">Tambah transaksi baru</div>
                 <div class="card-body">
+                    
                     <form method="POST" action="{{route('transaksi.simpan')}}" enctype="multipart/form-data">
                         @csrf
                         

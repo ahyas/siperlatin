@@ -33,7 +33,4 @@ class HomeController extends Controller
         return view('home', compact("table"));
     }
 
-    public function test(){
-        return view("test");
-    }
 }
