@@ -21,7 +21,7 @@
                         <tr>
                             <td><?php echo sprintf('%03d', $row->kode_transaksi); ?></td>
                             <td>{{$row->keterangan}}</td>
-                            <td>{{$row->nominal}}</td>
+                            <td><?php echo number_format((float)$row->nominal, 2, ',', '.'); ?></td>
                             <td>{{$row->tanggal}}</td>
                             <td><a href="storage/files/{{$row->file_name}}" target="_blank">{{$row->file_name}}</a></td>
                             <th><button class="btn btn-primary btn-sm edit" data-id_transaksi="{{$row->kode_transaksi}}">Edit</button> <button class="btn btn-danger btn-sm delete" data-id_transaksi="{{$row->kode_transaksi}}">Hapus</button></th>
@@ -37,7 +37,7 @@
                         @endforeach
                         <tr class="table-danger">
                             <td colspan="2" align="center"><b>Total</b></td>
-                            <td><b>{{$total}}</b></td>
+                            <td><b><?php echo number_format((float)$total, 2, ',', '.'); ?></b></td>
                             <td></td>
                             <td></td>
                             <td></td>

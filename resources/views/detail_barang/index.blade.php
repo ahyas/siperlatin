@@ -19,21 +19,16 @@
                                                 <img src="../public/images/empty.png" style="width:145px" />
 
                                             <?php } ?>
-                            </td>
-                            <td>
-                                <h6>{{$table->nama_barang}}</h6>
-                                <h4>{{$table->kode_detail_barang}} {{$table->nama_detail_barang}}</h4>
-                                <p>{{$table->keterangan}}</p>
-                            </td>
-                            <td width="90px">
-                                <?php $url = "www.siperlatin.pta-papuabarat.go.id/detail_barang/".$id_detail_barang; ?>
-                                {!! QrCode::size(90)->generate($url); !!}
+                                              <!--<h6>{{$table->nama_barang}}</h6>-->
+                                <h4>{{$table->kode_detail_barang}} <br>{{$table->nama_detail_barang}}</h4>
+                                <p>{{$table->keterangan}}</p>   
                             </td>
                         </tr>
                     </table>
                     <p><b>History perawatan</b></p>
-                    
-                    <table class="table">
+
+                    <div class="table-responsive">
+                    <table class="table table-striped table-sm">
                         <tr>
                             <th>Tanggal</th>
                             <th>Keterangan</th>
@@ -49,13 +44,19 @@
                             <tr>
                                 <td>{{$row->tanggal}}</td>
                                 <td>{{$row->keterangan}}</td>
-                                <td>{{$row->nominal}}</td>
+                                <td><?php echo number_format((float)$row->nominal, 2, ',', '.'); ?></td>
                                 <td><a href="../storage/files/{{$row->file_name}}" target="_blank">{{$row->file_name}}</a></td>
                             </tr>
                             @endforeach
+                            
                         @endif
+                        <tr class="table-danger">
+                            <td colspan="2" align="center"><b>Total</b></td>
+                            <td><b><?php echo number_format((float)$total, 2, ',', '.'); ?></b></td>
+                            <td></td>
+                        </tr>
                     </table>
-                    
+                    </div>
                 </div>
             </div>
         </div>

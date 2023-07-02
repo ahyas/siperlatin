@@ -14,7 +14,7 @@
                             <tr>
                                 <th>Kode barang</th>
                                 <th>Nama barang</th>
-                                <th align="center">Jumlah barang</th>
+                                <th align="center">Qty.</th>
                                 <th></th>
                             </tr>
                         </thead>

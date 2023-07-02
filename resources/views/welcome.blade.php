@@ -13,11 +13,19 @@
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
+                color: #0a4293;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
+            }
+
+            body {
+                height: 100%;
+                margin: 0;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-image: linear-gradient(#b1ccea, #98b8df, #638dc9);
             }
 
             .full-height {
@@ -49,7 +57,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #0a4293;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -81,9 +89,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Siperlatin<br>
+                    <img src="public/images/logo.png" style="width:150px"><br>
+                    <b>Siperlatin</b><br>
                 </div>
-                <div class="subtitle">Sistem Perawatan Peralatan dan Mesin</div>
+                <div class="subtitle"><b>Sistem Perawatan Peralatan dan Mesin</b></div>
                 <!--<div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>

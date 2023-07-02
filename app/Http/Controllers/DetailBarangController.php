@@ -18,8 +18,10 @@ class DetailBarangController extends Controller
         ->where("id_sub_barang",$id_detail_barang)
         ->get();
 
+        $total = $transaksi->sum("nominal");
+
         $count = $transaksi->count();
 
-        return view("detail_barang/index", compact("table","transaksi","count","id_detail_barang"));
+        return view("detail_barang/index", compact("table","transaksi","count","id_detail_barang","total"));
     }
 }
