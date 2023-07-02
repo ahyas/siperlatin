@@ -10,7 +10,18 @@
                     <table class="table table-sm">
                     @foreach($table as $row)
                         <tr>
-                            <td>{{$row->kode_detail_barang}} {{$row->nama_detail_barang}} <a href="{{route('detail_barang.index', ['id_detail_barang'=>$row->id_detail_barang])}}">Detail</a></td>
+                            <td width="100px">
+                                <?php
+                            if(!empty($row->foto)){?>
+                                                <img src="storage/foto/{{$row->foto}}" style="width:90px" />
+                                            <?php 
+                                            
+                                            } else { ?>
+                                                <img src="public/images/empty.png" style="width:90px" />
+
+                                            <?php } ?>
+                            </td>
+                            <td>{{$row->kode_detail_barang}} {{$row->nama_detail_barang}} <br><a href="{{route('detail_barang.index', ['id_detail_barang'=>$row->id_detail_barang])}}">Detail</a></td>
                         </tr>
                     @endforeach
                     </table>

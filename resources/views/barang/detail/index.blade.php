@@ -11,7 +11,7 @@
                     <p style="padding-top:10px">Referensi barang: {{$table->kode}} <b>{{$table->nama}}</b></p>
                     <table class="table table-striped">
                         <tr>
-                            <th width="100px">QR Code</th>
+                            <th width="100px">Foto</th>
                             <th>Kode sub barang</th>
                             <th>Nama sub barang</th>
                             <th>Keterangan</th>
@@ -20,7 +20,18 @@
                         @if($info=="")
                             @foreach($detail as $row)
                                 <tr>
-                                    <td>{!! QrCode::size(90)->generate($row->kode); !!}</td>
+                                    <!--<td>{!! QrCode::size(90)->generate($row->kode); !!}</td>-->
+                                    <td>
+                                        <?php
+                                            if(!empty($row->foto)){?>
+                                                <img src="../../storage/foto/{{$row->foto}}" style="width:90px" />
+                                            <?php 
+                                            
+                                            } else { ?>
+                                                <img src="../../public/images/empty.png" style="width:90px" />
+
+                                            <?php } ?>
+                                        </td>
                                     <td>{{$row->kode}}</td>
                                     <td>{{$row->nama}}</td>
                                     <td>{{$row->keterangan}}</td>

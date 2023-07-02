@@ -30,6 +30,7 @@
                             <td colspan="6" style="padding-left:70px">
                                 <span><i>Detail transaksi</i></span><br>
                                 <span><b>Barang :</b> {{$row->nama_barang}}</span><br>
+                                <span><b>Kode :</b> {{$row->kode_detail_barang}}</span><br>
                                 <span><b>Sub barang :</b> {{$row->nama_sub_barang}}</span>
                             </td>
                         </tr>

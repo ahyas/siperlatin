@@ -8,7 +8,7 @@
                 <div class="card-header">Tambah sub barang</div>
                 <div class="card-body">
                     <p>Referensi barang : {{$table->kode}} <b>{{$table->nama}}</b></p>
-                    <form method="POST" action="{{route('barang.detail.simpan',['id_barang'=>$table->id])}}">
+                    <form method="POST" action="{{route('barang.detail.simpan',['id_barang'=>$table->id])}}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">NUP</label>
@@ -26,6 +26,12 @@
                             <label class="col-sm-2 col-form-label">Keterangan</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" name="keterangan" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Foto</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" name="foto" accept=".jpg, .jpeg, .png">
                             </div>
                         </div>
                         

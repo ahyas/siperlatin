@@ -94,12 +94,19 @@ class BarangController extends Controller
     }
 
     public function simpan_detail(Request $request, $id_barang){
+        $fileName = time().'.'.$request->foto->extension();
+        
+        $tujuan_upload = storage_path('foto');
+
+        $request->foto->move($tujuan_upload, $fileName);
+
         DB::table("tb_detail_barang")
         ->insert([
             "id_barang"=>$id_barang,
             "kode"=>$request["kode_barang"],
             "nama"=>$request["nama_barang"],
             "keterangan"=>$request["keterangan"],
+            "foto"=>$fileName
         ]);
 
         return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
@@ -143,13 +150,44 @@ class BarangController extends Controller
     }
 
     public function update_detail(Request $request, $id_barang, $id_detail){
-        DB::table("tb_detail_barang")
-        ->where("id",$id_detail)
-        ->where("id_barang", $id_barang)
-        ->update([
-            "kode"=>$request["kode_barang"],
-            "nama"=>$request["nama_barang"]
-        ]);
+        if($request->hasFile("foto")){
+            $exist = DB::table("tb_detail_barang")
+            ->where("id_barang",$id_barang)
+            ->select("foto")
+            ->first();
+
+            if(!is_null($exist->foto)){
+                $previous_file = DB::table("tb_detail_barang")
+                ->where("id_barang",$id_barang)
+                ->select("foto")
+                ->first();
+                //delete previous file
+                unlink(storage_path('foto/'.$previous_file->foto));
+            }
+
+            $fileName = time().'.'.$request->foto->extension();
+            
+            $tujuan_upload = storage_path('foto');
+            $request->foto->move($tujuan_upload, $fileName);
+
+            DB::table("tb_detail_barang")
+            ->where("id",$id_detail)
+            ->where("id_barang", $id_barang)
+            ->update([
+                "kode"=>$request["kode_barang"],
+                "nama"=>$request["nama_barang"],
+                "foto"=>$fileName
+            ]);
+            
+        }else{
+            DB::table("tb_detail_barang")
+            ->where("id",$id_detail)
+            ->where("id_barang", $id_barang)
+            ->update([
+                "kode"=>$request["kode_barang"],
+                "nama"=>$request["nama_barang"],
+            ]);
+        }
         return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
     }
 

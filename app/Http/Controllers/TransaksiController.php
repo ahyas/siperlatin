@@ -10,7 +10,7 @@ class TransaksiController extends Controller
 {
     public function index(){
         $table=DB::table("tb_transaksi")
-        ->select("tb_transaksi.id as kode_transaksi","tb_transaksi.tanggal","tb_transaksi.file_name","tb_transaksi.nominal","tb_transaksi.nominal","tb_transaksi.keterangan","tb_barang.nama as nama_barang", "tb_detail_barang.nama as nama_sub_barang")
+        ->select("tb_transaksi.id as kode_transaksi","tb_transaksi.tanggal","tb_transaksi.file_name","tb_transaksi.nominal","tb_transaksi.nominal","tb_transaksi.keterangan","tb_barang.nama as nama_barang", "tb_detail_barang.nama as nama_sub_barang","tb_detail_barang.kode AS kode_detail_barang")
         ->join("tb_barang","tb_transaksi.id_barang","=","tb_barang.id")
         ->join("tb_detail_barang","tb_transaksi.id_sub_barang","=","tb_detail_barang.id")
         ->paginate(10);

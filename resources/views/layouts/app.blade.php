@@ -152,10 +152,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script src="//cdn.datatables.net/plug-ins/1.10.25/api/sum().js"></script>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         @stack('scripts')
         <div class="footer">
-            <p>Copyright &copy; Pengadilan Agama Kaimana. Kompleks Stadion Bantemi, Utarom, Kaimana.</p>
+            <p>Copyright &copy; Pengadilan Tinggi Agama Papua Barat. Jl. Brawijaya, Kelurahan Manokwari Timur, Distrik Manokwari,
+
+Provinsi Papua Barat. Kode POS 98311.</p>
         </div>
 </body>
 </html>

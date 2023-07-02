@@ -8,7 +8,7 @@
                 <div class="card-header">Edit barang</div>
                 <div class="card-body">
                 <p>Referensi barang : {{$info_barang->kode}} <b>{{$info_barang->nama}}</b></p>
-                    <form method="POST" action="{{route('barang.detail.update', ['id_barang'=>$table->id_barang, 'id_detail'=>$table->id])}}">
+                    <form method="POST" action="{{route('barang.detail.update', ['id_barang'=>$table->id_barang, 'id_detail'=>$table->id])}}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Kode sub barang</label>
@@ -26,6 +26,12 @@
                             <label class="col-sm-2 col-form-label">Keterangan</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" name="keterangan" rows="3">{{$table->keterangan}}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Foto</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" name="foto" accept=".jpg, .jpeg, .png">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-sm simpan">Update</button>
