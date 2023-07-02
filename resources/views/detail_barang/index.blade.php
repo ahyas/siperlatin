@@ -19,7 +19,7 @@
                                                 <img src="../public/images/empty.png" style="width:145px" />
 
                                             <?php } ?>
-                                              <!--<h6>{{$table->nama_barang}}</h6>-->
+                                             
                                 <h4>{{$table->kode_detail_barang}} <br>{{$table->nama_detail_barang}}</h4>
                                 <p>{{$table->keterangan}}</p>   
                             </td>
