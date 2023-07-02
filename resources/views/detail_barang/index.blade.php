@@ -26,7 +26,7 @@
                                 <p>{{$table->keterangan}}</p>
                             </td>
                             <td width="90px">
-                                <?php $url = "siperlatin.pta-papuabarat/detail_barang/".$id_detail_barang; ?>
+                                <?php $url = "www.siperlatin.pta-papuabarat.go.id/detail_barang/".$id_detail_barang; ?>
                                 {!! QrCode::size(90)->generate($url); !!}
                             </td>
                         </tr>
