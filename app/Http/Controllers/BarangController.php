@@ -94,20 +94,30 @@ class BarangController extends Controller
     }
 
     public function simpan_detail(Request $request, $id_barang){
-        $fileName = time().'.'.$request->foto->extension();
-        
-        $tujuan_upload = storage_path('foto');
+        if($request->hasFile("foto")){
+            $fileName = time().'.'.$request->foto->extension();
+            
+            $tujuan_upload = storage_path('foto');
 
-        $request->foto->move($tujuan_upload, $fileName);
+            $request->foto->move($tujuan_upload, $fileName);
 
-        DB::table("tb_detail_barang")
-        ->insert([
-            "id_barang"=>$id_barang,
-            "kode"=>$request["kode_barang"],
-            "nama"=>$request["nama_barang"],
-            "keterangan"=>$request["keterangan"],
-            "foto"=>$fileName
-        ]);
+            DB::table("tb_detail_barang")
+            ->insert([
+                "id_barang"=>$id_barang,
+                "kode"=>$request["kode_barang"],
+                "nama"=>$request["nama_barang"],
+                "keterangan"=>$request["keterangan"],
+                "foto"=>$fileName
+            ]);
+        }else{
+            DB::table("tb_detail_barang")
+            ->insert([
+                "id_barang"=>$id_barang,
+                "kode"=>$request["kode_barang"],
+                "nama"=>$request["nama_barang"],
+                "keterangan"=>$request["keterangan"]
+            ]);
+        }
 
         return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
     }
