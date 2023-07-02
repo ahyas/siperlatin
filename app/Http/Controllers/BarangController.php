@@ -176,6 +176,7 @@ class BarangController extends Controller
             ->update([
                 "kode"=>$request["kode_barang"],
                 "nama"=>$request["nama_barang"],
+                "keterangan"=>$request["keterangan"],
                 "foto"=>$fileName
             ]);
             
@@ -186,6 +187,7 @@ class BarangController extends Controller
             ->update([
                 "kode"=>$request["kode_barang"],
                 "nama"=>$request["nama_barang"],
+                "keterangan"=>$request["keterangan"],
             ]);
         }
         return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
