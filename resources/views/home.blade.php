@@ -7,13 +7,19 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
-                    <table class="table table-sm">
-                    @foreach($table as $row)
-                        <tr>
-                            <td width="100px">
+                    
+
+                    <table style="width:100%">
+                    @foreach($table as $key => $item)
+
+                        @if ($key % 3 == 0)
+                            <tr>
+                        @endif
+
+                        <td width="100px">
                                 <?php
-                            if(!empty($row->foto)){?>
-                                                <img src="storage/foto/{{$row->foto}}" style="width:90px" />
+                            if(!empty($item->foto)){?>
+                                                <img src="storage/foto/{{$item->foto}}" style="width:90px" />
                                             <?php 
                                             
                                             } else { ?>
@@ -21,9 +27,17 @@
 
                                             <?php } ?>
                             </td>
-                            <td>{{$row->kode_detail_barang}} {{$row->nama_detail_barang}} <br><a href="{{route('detail_barang.index', ['id_detail_barang'=>$row->id_detail_barang])}}">Detail</a></td>
+                            <td>{{$item->kode_detail_barang}} {{$item->nama_detail_barang}} <br><a href="{{route('detail_barang.index', ['id_detail_barang'=>$item->id_detail_barang])}}">Detail</a></td>
+
+                        @if (($key + 1) % 3 == 0)
+                            </tr>
+                        @endif
+
+                        @endforeach
+
+                        @if (($key + 1) % 3 != 0)
                         </tr>
-                    @endforeach
+                        @endif
                     </table>
                 </div>
             </div>
