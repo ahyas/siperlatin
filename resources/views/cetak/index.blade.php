@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Cetak QR Code</div>
                 <div class="card-body">
-
+                <div class="table-responsive">
                     <table style="width:100%">
                     @foreach($table as $key => $item)
 
@@ -32,6 +32,7 @@
                         </tr>
                         @endif
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
