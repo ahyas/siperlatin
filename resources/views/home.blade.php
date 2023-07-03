@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
                     
-
+                <div class="table-responsive">
                     <table style="width:100%">
                     @foreach($table as $key => $item)
 
@@ -39,6 +39,7 @@
                         </tr>
                         @endif
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
