@@ -16,7 +16,7 @@
                         @endif
 
                         <td style="padding-bottom:15px; text-align:center">
-                            <?php $url = "www.siperlatin.pta-papuabarat.go.id/detail_barang/{{$item->id_detail_barang}}"; ?>
+                            <?php $url = "www.siperlatin.pta-papuabarat.go.id/detail_barang/".$item->id_detail_barang; ?>
                             {!! QrCode::size(90)->generate($url); !!}<br>
                             <span>{{ $item->kode_detail_barang }}</span><br>
                             <span>{{ $item->nama_detail_barang }}</span>
