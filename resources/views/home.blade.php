@@ -27,7 +27,7 @@
 
                                             <?php } ?>
                             </td>
-                            <td>{{$item->kode_detail_barang}} {{$item->nama_detail_barang}} <br><a href="{{route('detail_barang.index', ['id_detail_barang'=>$item->id_detail_barang])}}">Detail</a></td>
+                            <td>{{$item->kode_detail_barang}} <br>{{$item->nama_detail_barang}} <br><a href="{{route('detail_barang.index', ['id_detail_barang'=>$item->id_detail_barang])}}">Detail</a></td>
 
                         @if (($key + 1) % 3 == 0)
                             </tr>

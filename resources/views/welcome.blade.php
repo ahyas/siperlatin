@@ -87,8 +87,8 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
+            <div class="content" style="background-color:#bfe8ff; padding:20px; border-radius: 10px; border:1px solid #0a4293">
+                <div class="title m-b-md" style="line-height:70px">
                     <img src="public/images/logo.png" style="width:150px"><br>
                     <b>Siperlatin</b><br>
                 </div>
