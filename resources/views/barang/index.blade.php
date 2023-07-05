@@ -8,7 +8,7 @@
                 <div class="card-header">Daftar barang</div>
                 <div class="card-body">
                     <button class="btn btn-primary btn-sm tambah" style="margin-bottom:10px">Tambah</button>
-                    
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -39,6 +39,7 @@
                     <p>Halaman : <b>{{ $table->currentPage() }}</b> Jumlah Data : <b>{{ $table->total() }}</b></p>
                 
                     {{ $table->links() }}
+                    </div>
                 </div>
             </div>
         </div>
