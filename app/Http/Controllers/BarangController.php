@@ -166,7 +166,7 @@ class BarangController extends Controller
             ->select("foto")
             ->first();
 
-            if(!is_null($exist->foto)){
+            if(file_exists(storage_path().'/foto/'.$exist->foto)){
                 $previous_file = DB::table("tb_detail_barang")
                 ->where("id_barang",$id_barang)
                 ->select("foto")

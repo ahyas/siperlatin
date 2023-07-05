@@ -57,13 +57,19 @@ class TransaksiController extends Controller
 
     public function update(Request $request, $id_transaksi){
         if($request->hasFile("lampiran")){
-            $previous_file = DB::table("tb_transaksi")
+            $exist = DB::table("tb_transaksi")
             ->where("id",$id_transaksi)
             ->select("file_name")
             ->first();
 
-            //delete previous file
-            unlink(storage_path('files/'.$previous_file->file_name));
+            if(file_exists(storage_path().'/files/'.$exist->file_name)){
+                $previous_file = DB::table("tb_transaksi")
+                ->where("id",$id_transaksi)
+                ->select("file_name")
+                ->first();
+                //delete previous file
+                unlink(storage_path('files/'.$previous_file->file_name));
+            }
 
             $fileName = time().'.'.$request->lampiran->extension();
         
