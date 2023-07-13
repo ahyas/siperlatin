@@ -7,7 +7,29 @@
             <div class="card">
                 <div class="card-header">Daftar barang</div>
                 <div class="card-body">
-                    <button class="btn btn-primary btn-sm tambah" style="margin-bottom:10px">Tambah</button>
+                    <a class="btn btn-primary btn-sm" href="{{route('barang.tambah_barang')}}" role="button" style="margin-bottom:10px;">Tambah</a>
+                    
+                    <form action="{{route('barang.pencarian')}}" method="GET">
+                        <div class="form-row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Pencarian barang</label>
+                            <div class="col-11">
+                                @if(Request::has('kata_kunci'))
+                                    @php 
+                                        $value = Request::get('kata_kunci')
+                                    @endphp
+                                @else
+                                    @php 
+                                        $value = ''
+                                    @endphp
+                                @endif
+                                <input type="text" class="form-control" placeholder="Masukan kata kunci" name="kata_kunci" style="margin-bottom:15px" value="{{$value}}">
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-block">Cari</button>
+                            </div>
+                        </div>
+                    </form>
+
                     <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -31,7 +53,9 @@
                                     @endif
                                 </td>
                                 <?php if($row->jumlah_detail_barang==0){$disabled="";}else{$disabled="disabled";} ?>
-                                <td align="right"><button class="btn btn-primary btn-sm edit" data-id="{{$row->id}}">Edit</button> <button class="btn btn-success btn-sm detail" data-id="{{$row->id}}">Detail</button> <button class="btn btn-danger btn-sm delete" data-id="{{$row->id}}" <?php echo $disabled; ?>>Delete</button></td>
+                                <td align="right"> 
+                                    <a class="btn btn-primary btn-sm" href="{{route('barang.edit', ['id_barang'=>$row->id])}}" role="button">Edit</a> <a class="btn btn-success btn-sm" href="{{route('barang.detail', ['id_barang'=>$row->id])}}" role="button">Detail</a> <a class="btn btn-danger btn-sm" href="{{route('barang.hapus', ['id_barang'=>$row->id])}}" role="button" <?php echo $disabled; ?>>Delete</a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -49,27 +73,7 @@
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function(){
-        $("body").on("click",".tambah",function(){
-            window.location.href = "{{route('barang.tambah_barang')}}";
-        });
 
-        $("body").on("click",".edit",function(){
-            var id_barang = $(this).data("id");
-            window.location.href = "barang/"+id_barang+"/edit";
-        });
-
-        $("body").on("click",".delete",function(){
-            var id_barang = $(this).data("id");
-            if(window.confirm("Anda yakin ingin menghapus data ini?")){
-                window.location.href = "barang/"+id_barang+"/hapus";
-            }
-        });
-
-        $("body").on("click",".detail",function(){
-            var id_barang = $(this).data("id");
-            console.log("Detail ",id_barang);
-            window.location.href  ="barang/"+id_barang+"/detail";
-        });
     });
 </script>
 @endpush

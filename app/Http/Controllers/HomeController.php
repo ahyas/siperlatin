@@ -30,7 +30,9 @@ class HomeController extends Controller
         ->join("tb_barang","tb_detail_barang.id_barang","=","tb_barang.id")
         ->get();
 
-        return view('home', compact("table"));
+        $baris=$table->count();
+
+        return view('home', compact("table","baris"));
     }
 
 }

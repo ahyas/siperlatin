@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("barang/{id_barang}/detail/{id_detail}/edit", "BarangController@edit_detail")->name("barang.detail.edit");
     Route::post("barang/{id_barang}/detail/{id_detail}/update", "BarangController@update_detail")->name("barang.detail.update");
     Route::get("barang/{id_barang}/detail/{id_detail}/delete","BarangController@delete_detail")->name("barang.detail.delete");
+    Route::get("barang/pencarian","BarangController@pencarian")->name("barang.pencarian");
 
     Route::get("transaksi","TransaksiController@index")->name("transaksi.index");
     Route::get("transaksi/tambah","TransaksiController@tambah")->name("transaksi.tambah");

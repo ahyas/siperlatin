@@ -7,36 +7,38 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
-                    
+                
                 <div class="table-responsive">
                     <table style="width:100%">
-                    @foreach($table as $key => $item)
+                    @if($baris>0)
+                        @foreach($table as $key => $item)
 
-                        @if ($key % 3 == 0)
-                            <tr>
-                        @endif
+                            @if ($key % 3 == 0)
+                                <tr>
+                            @endif
 
-                        <td width="100px">
-                                <?php
-                            if(!empty($item->foto)){?>
-                                                <img src="storage/foto/{{$item->foto}}" style="width:90px" />
-                                            <?php 
-                                            
-                                            } else { ?>
-                                                <img src="public/images/empty.png" style="width:90px" />
+                            <td width="100px">
+                                    <?php
+                                if(!empty($item->foto)){?>
+                                    <img src="storage/foto/{{$item->foto}}" style="width:90px" />
+                                <?php 
+                                
+                                } else { ?>
+                                    <img src="public/images/empty.png" style="width:90px" />
 
-                                            <?php } ?>
-                            </td>
-                            <td>{{$item->kode_detail_barang}} <br>{{$item->nama_detail_barang}} <br><a href="{{route('detail_barang.index', ['id_detail_barang'=>$item->id_detail_barang])}}">Detail</a></td>
+                                <?php } ?>
+                                </td>
+                                <td>{{$item->kode_detail_barang}} <br>{{$item->nama_detail_barang}} <br><a href="{{route('detail_barang.index', ['id_detail_barang'=>$item->id_detail_barang])}}">Detail</a></td>
 
-                        @if (($key + 1) % 3 == 0)
+                            @if (($key + 1) % 3 == 0)
+                                </tr>
+                            @endif
+
+                            @endforeach
+
+                            @if (($key + 1) % 3 != 0)
                             </tr>
-                        @endif
-
-                        @endforeach
-
-                        @if (($key + 1) % 3 != 0)
-                        </tr>
+                            @endif
                         @endif
                     </table>
                     </div>
