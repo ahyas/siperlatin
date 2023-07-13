@@ -10,22 +10,33 @@
                     <a class="btn btn-primary btn-sm" href="{{route('barang.tambah_barang')}}" role="button" style="margin-bottom:10px;">Tambah</a>
                     
                     <form action="{{route('barang.pencarian')}}" method="GET">
+                    <label for="kata_kunci" class="form-label">Pencarian barang</label>
                         <div class="form-row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Pencarian barang</label>
-                            <div class="col-11">
+                            
+                            <div class="col-10  ">
                                 @if(Request::has('kata_kunci'))
                                     @php 
-                                        $value = Request::get('kata_kunci')
+                                        $value = Request::get('kata_kunci');
+                                        $disabled = '';
                                     @endphp
+                                    @if($value=='')
+                                        @php
+                                            $disabled = 'disabled';
+                                        @endphp
+                                    @endif
                                 @else
                                     @php 
-                                        $value = ''
+                                        $value = '';
+                                        $disabled = 'disabled';
                                     @endphp
                                 @endif
                                 <input type="text" class="form-control" placeholder="Masukan kata kunci" name="kata_kunci" style="margin-bottom:15px" value="{{$value}}">
                             </div>
                             <div class="col">
                                 <button type="submit" class="btn btn-primary btn-block">Cari</button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-danger btn-block reset" <?php echo $disabled; ?>>Reset</button>
                             </div>
                         </div>
                     </form>
@@ -73,7 +84,10 @@
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function(){
-
+        $(".reset").on("click",function(){
+            console.log("reset");
+            window.location = "{{route('barang.index')}}";
+        });
     });
 </script>
 @endpush

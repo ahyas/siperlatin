@@ -222,6 +222,7 @@ class BarangController extends Controller
     public function pencarian(Request $request){
         $table = DB::table("tb_barang")
         ->where('tb_barang.nama','like',"%".$request->kata_kunci."%")
+        ->orWhere('tb_barang.kode','like',"%".$request->kata_kunci."%")
         ->select("tb_barang.id","tb_barang.kode","tb_barang.nama", DB::raw("count(tb_detail_barang.id_barang) as jumlah_detail_barang"))
         ->leftJoin("tb_detail_barang","tb_barang.id","=","tb_detail_barang.id_barang")
         ->groupBy("tb_barang.id","tb_barang.kode","tb_barang.nama","tb_detail_barang.id_barang")
