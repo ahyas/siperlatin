@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nama sub barang</label>
+                            <label class="col-sm-2 col-form-label">NUP / Nama sub barang</label>
                             <div class="col-sm-10">
                                 <select class="form-control sub_barang" name="sub_barang" id="sub_barang">
                                     <option value="0" selected> Pilih sub barang</option>
@@ -98,7 +98,7 @@
                         for(var i = 0; i < data.length; i++){
                             var opt = document.createElement('option');
                             opt.value = data[i].id;
-                            opt.innerHTML = data[i].nama;
+                            opt.innerHTML = data[i].kode+" - "+data[i].nama;
                             select.appendChild(opt);
                         }
 

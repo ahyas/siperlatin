@@ -39,13 +39,19 @@ class BarangController extends Controller
         
         $count_detail=DB::table("tb_detail_barang")
         ->where("id_barang", $id_barang);
+        
+        $detail = DB::table("tb_detail_barang")
+        ->where("tb_detail_barang.id_barang",$id_barang)
+        ->select("tb_detail_barang.id","tb_detail_barang.id_barang","tb_detail_barang.nama","tb_detail_barang.kode","tb_detail_barang.tgl_perolehan","tb_detail_barang.harga_perolehan","tb_satuan_barang.nama_satuan","tb_satuan_barang.id AS id_satuan","tb_detail_barang.keterangan","tb_detail_barang.foto")
+        ->leftJoin("tb_satuan_barang","tb_detail_barang.satuan","=","tb_satuan_barang.id")
+        ->get();
 
         if($count_detail->count() > 0){
             $info="";
-            $detail = DB::table("tb_detail_barang")->where("id_barang",$id_barang)->get();
+            
         }else{
             $info="Belum ada detail barang";
-            $detail = DB::table("tb_detail_barang")->where("id_barang",$id_barang)->get();
+            
         }
 
         return view("barang/detail/index", compact("table","detail","info"));
@@ -68,9 +74,13 @@ class BarangController extends Controller
         ->where("id_barang",$id_barang)
         ->count();
 
+        $satuan_barang = DB::table("tb_satuan_barang")
+        ->select("nama_satuan","id")
+        ->get();
+
         $kode = $table->kode.".".($last_id+1);
 
-        return view("barang/detail/new", compact("kode","table"));
+        return view("barang/detail/new", compact("kode","table","satuan_barang"));
     }
 
     public function tambah_barang(){
@@ -106,6 +116,9 @@ class BarangController extends Controller
                 "id_barang"=>$id_barang,
                 "kode"=>$request["kode_barang"],
                 "nama"=>$request["nama_barang"],
+                "tgl_perolehan"=>$request["tgl_perolehan"],
+                "harga_perolehan"=>$request["harga_perolehan"],
+                "satuan"=>$request["satuan"],
                 "keterangan"=>$request["keterangan"],
                 "foto"=>$fileName
             ]);
@@ -115,6 +128,9 @@ class BarangController extends Controller
                 "id_barang"=>$id_barang,
                 "kode"=>$request["kode_barang"],
                 "nama"=>$request["nama_barang"],
+                "tgl_perolehan"=>$request["tgl_perolehan"],
+                "harga_perolehan"=>$request["harga_perolehan"],
+                "satuan"=>$request["satuan"],
                 "keterangan"=>$request["keterangan"]
             ]);
         }
@@ -139,13 +155,18 @@ class BarangController extends Controller
         ->where("id",$id_barang)
         ->first();
 
+        $satuan_barang = DB::table("tb_satuan_barang")
+        ->select("nama_satuan","id")
+        ->get();
+
         $table=DB::table("tb_detail_barang")
-        ->select("id","id_barang","nama","kode","keterangan")
-        ->where("id_barang",$id_barang)
-        ->where("id", $id_detail)
+        ->select("tb_detail_barang.id","tb_detail_barang.id_barang","tb_detail_barang.nama","tb_detail_barang.kode","tb_detail_barang.tgl_perolehan","tb_detail_barang.harga_perolehan","tb_satuan_barang.nama_satuan","tb_satuan_barang.id AS id_satuan","tb_detail_barang.keterangan")
+        ->leftJoin("tb_satuan_barang","tb_detail_barang.satuan","=","tb_satuan_barang.id")
+        ->where("tb_detail_barang.id_barang",$id_barang)
+        ->where("tb_detail_barang.id", $id_detail)
         ->first();
 
-        return view("barang/detail/edit", compact("table","info_barang"));
+        return view("barang/detail/edit", compact("table","info_barang","satuan_barang"));
     }
 
     public function update(Request $request, $id_barang){
@@ -159,19 +180,22 @@ class BarangController extends Controller
     }
 
     public function update_detail(Request $request, $id_barang, $id_detail){
-        if($request->hasFile("foto")){
+        if($request->hasFile("foto")){ 
+
             $exist = DB::table("tb_detail_barang")
             ->where("id_barang",$id_barang)
             ->select("foto")
             ->first();
-
-            if(file_exists(storage_path().'/foto/'.$exist->foto)){
-                $previous_file = DB::table("tb_detail_barang")
-                ->where("id_barang",$id_barang)
-                ->select("foto")
-                ->first();
-                //delete previous file
-                unlink(storage_path('foto/'.$previous_file->foto));
+            
+            if(!empty($exist->foto)){
+                if(file_exists(storage_path().'/foto/'.$exist->foto)){
+                    $previous_file = DB::table("tb_detail_barang")
+                    ->where("id_barang",$id_barang)
+                    ->select("foto")
+                    ->first();
+                    //delete previous file
+                    unlink(storage_path('foto/'.$previous_file->foto));
+                }
             }
 
             $fileName = time().'.'.$request->foto->extension();
@@ -185,6 +209,9 @@ class BarangController extends Controller
             ->update([
                 "kode"=>$request["kode_barang"],
                 "nama"=>$request["nama_barang"],
+                "tgl_perolehan"=>$request["tgl_perolehan"],
+                "harga_perolehan"=>$request["harga_perolehan"],
+                "satuan"=>$request["satuan"],
                 "keterangan"=>$request["keterangan"],
                 "foto"=>$fileName
             ]);
@@ -196,6 +223,9 @@ class BarangController extends Controller
             ->update([
                 "kode"=>$request["kode_barang"],
                 "nama"=>$request["nama_barang"],
+                "tgl_perolehan"=>$request["tgl_perolehan"],
+                "harga_perolehan"=>$request["harga_perolehan"],
+                "satuan"=>$request["satuan"],
                 "keterangan"=>$request["keterangan"],
             ]);
         }

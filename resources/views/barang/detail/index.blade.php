@@ -11,16 +11,22 @@
                     <p style="padding-top:10px">Referensi barang: {{$table->kode}} <b>{{$table->nama}}</b></p>
                     <table class="table table-striped">
                         <tr>
+                            <th width="15px">No.</th>
                             <th width="100px">Foto</th>
-                            <th>Kode sub barang</th>
+                            <th>Kode NUP</th>
                             <th>Nama sub barang</th>
-                            <th>Keterangan</th>
+                            <th>Tanggal perolehan</th>
+                            <th>Harga perolehan</th>
+                            <th>Satuan</th>
                             <th></th>
                         </tr>
                         @if($info=="")
+                            @php 
+                                $num=1;
+                            @endphp
                             @foreach($detail as $row)
                                 <tr>
-                                    <!--<td>{!! QrCode::size(90)->generate($row->kode); !!}</td>-->
+                                    <td>{{$num}}</td>
                                     <td>
                                         <?php
                                             if(!empty($row->foto)){?>
@@ -34,13 +40,18 @@
                                         </td>
                                     <td>{{$row->kode}}</td>
                                     <td>{{$row->nama}}</td>
-                                    <td>{{$row->keterangan}}</td>
+                                    <td>{{$row->tgl_perolehan}}</td>
+                                    <td>{{$row->harga_perolehan}}</td>
+                                    <td>{{$row->nama_satuan}}</td>
                                     <td align="right"><a class="btn btn-primary btn-sm" href="{{route('barang.detail.edit', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button">Edit</a> <a class="btn btn-danger btn-sm" href="{{route('barang.detail.delete', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
                                 </tr>
+                                @php
+                                    $num++;
+                                @endphp
                             @endforeach
                         @else
                         <tr>
-                            <td colspan="4" align="center" class="table-danger">{{$info}}</td>
+                            <td colspan="8" align="center" class="table-danger">{{$info}}</td>
                         </tr>
                         @endif
                     </table>

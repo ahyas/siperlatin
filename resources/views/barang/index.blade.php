@@ -10,7 +10,7 @@
                     <a class="btn btn-primary btn-sm" href="{{route('barang.tambah_barang')}}" role="button" style="margin-bottom:10px;">Tambah</a>
                     
                     <form action="{{route('barang.pencarian')}}" method="GET">
-                    <label for="kata_kunci" class="form-label">Pencarian barang</label>
+                    <span">Pencarian barang</span>
                         <div class="form-row">
                             
                             <div class="col-10  ">
@@ -65,7 +65,7 @@
                                 </td>
                                 <?php if($row->jumlah_detail_barang==0){$disabled="";}else{$disabled="disabled";} ?>
                                 <td align="right"> 
-                                    <a class="btn btn-primary btn-sm" href="{{route('barang.edit', ['id_barang'=>$row->id])}}" role="button">Edit</a> <a class="btn btn-success btn-sm" href="{{route('barang.detail', ['id_barang'=>$row->id])}}" role="button">Detail</a> <a class="btn btn-danger btn-sm" href="{{route('barang.hapus', ['id_barang'=>$row->id])}}" role="button" <?php echo $disabled; ?>>Delete</a>
+                                    <a class="btn btn-primary btn-sm" href="{{route('barang.edit', ['id_barang'=>$row->id])}}" role="button">Edit</a> <a class="btn btn-success btn-sm" href="{{route('barang.detail', ['id_barang'=>$row->id])}}" role="button">Detail</a> <a data-id_barang=<?php echo $row->id; ?> class="btn btn-danger btn-sm {{$disabled}} hapus" href="#" role="button">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -87,6 +87,13 @@
         $(".reset").on("click",function(){
             console.log("reset");
             window.location = "{{route('barang.index')}}";
+        });
+
+        $("body").on("click", ".hapus", function(){
+            if(window.confirm("Anda yakin ingin menghapus data ini?")){
+                let id_barang = $(this).data("id_barang");
+                window.location = "barang/"+id_barang+"/hapus";
+            }
         });
     });
 </script>

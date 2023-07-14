@@ -119,7 +119,7 @@ class TransaksiController extends Controller
 
     public function get_sub_barang(Request $request){
         $table=DB::table("tb_detail_barang")
-        ->select("id","nama")
+        ->select("id","kode","nama")
         ->where("id_barang",$request->id_barang)
         ->get();
 

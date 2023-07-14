@@ -46,6 +46,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("barang/{id_barang}/detail/{id_detail}/delete","BarangController@delete_detail")->name("barang.detail.delete");
     Route::get("barang/pencarian","BarangController@pencarian")->name("barang.pencarian");
 
+    Route::get("satuan_barang", "SatuanBarangController@index")->name("satuan_barang.index");
+    Route::get("satuan_barang/tambah", "SatuanBarangController@tambah")->name("satuan_barang.tambah");
+    Route::post("satuan_barang/simpan", "SatuanBarangController@simpan")->name("satuan_barang.simpan");
+    Route::get("satuan_barang/{id}/edit", "SatuanBarangController@edit")->name("satuan_barang.edit");
+    Route::post("satuan_barang/{id}/update", "SatuanBarangController@update")->name("satuan_barang.update");
+    Route::get("satuan_barang/{id}/delete", "SatuanBarangController@delete")->name("satuan_barang.delete");
+
     Route::get("transaksi","TransaksiController@index")->name("transaksi.index");
     Route::get("transaksi/tambah","TransaksiController@tambah")->name("transaksi.tambah");
     Route::get("transaksi/get_sub_barang","TransaksiController@get_sub_barang")->name("transaksi.get_sub_barang");

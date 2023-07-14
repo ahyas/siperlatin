@@ -102,6 +102,7 @@
                                 </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{route('barang.index')}}">Daftar Barang</a>
+                                    <a class="dropdown-item" href="{{route('satuan_barang.index')}}">Satuan Barang</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
