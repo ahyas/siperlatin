@@ -10,20 +10,38 @@
                 
                 <div class="table-responsive">
                 @if($baris>0)
-                
+                <table style="width:100%" class="table table-bordered">
                     @foreach($tb_barang as $row)
-                    <h5 style="padding-top:20px; padding-bottom:10px">{{$row->kode}} - {{$row->nama}}</h5>
-                    
-                            <table style="width:100%; margin-left:20px" class="table table-striped">
-                                <tr style="font-weight:bold">
+                    <tr style="font-weight:bold" class="table-primary">
+                        <td>Kode barang</td>
+                        <td>Nama barang</td>
+                        <td align="right">Grandtotal perawatan</td>
+                    </tr>
+                    <tr class="table-success">
+                        <td>{{$row->kode}}</td>
+                        <td>{{$row->nama}}</td>
+                        <td align="right">
+                            @php $grand_total=0; @endphp
+                            @foreach($tb_transaksi as $a)
+                                @if($a->id_barang == $row->id_barang)
+                                    @php $grand_total+=$a->nominal; @endphp
+                                @endif
+                            @endforeach
+                            {{number_format($grand_total,2)}}
+                        </td>
+                    </tr>
+                    <tr class="table-success">
+                        <td colspan="3">
+                            <table style="width:100%; margin-left:20px" class="table table-bordered">
+                                <tr style="font-weight:bold" class="table-danger">
                                     <td></td>
                                     <td>NUP / Kode sub barang</td>
                                     <td>Nama sub barang</td>
-                                    <td align="right">Total transaksi perawatan</d>
+                                    <td align="right">Subtotal perawatan</d>
                                     <td></td>
                                 </tr>
                                 @foreach($table as $item)
-                                    @if($item->id_barang == $row->id)
+                                    @if($item->id_barang == $row->id_barang)
                                             <tr>
                                                 <td width="100px">
                                                     <?php
@@ -59,8 +77,15 @@
                                     @endif
                                 @endforeach
                             </table>
+                        </td>
+                    </tr>
+                    <tr style="font-weight:bold" class="table-light">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     @endforeach
-                
+                </table>
                 @endif
                     
                     </div>

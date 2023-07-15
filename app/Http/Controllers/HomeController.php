@@ -26,6 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $tb_barang = DB::table("tb_barang")
+        ->select("tb_barang.kode","tb_barang.nama","tb_barang.id AS id_barang")
         ->join("tb_detail_barang", "tb_barang.id","=","tb_detail_barang.id_barang")
         ->distinct()
         ->get(["tb_barang.nama","tb_barang.id","tb_barang.kode"]);

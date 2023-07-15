@@ -10,22 +10,31 @@
                     <table class="table">
                         <tr>
                             <td width="150px">
-                            <?php
-                            if(!empty($table->foto)){?>
-                                                <img src="../storage/foto/{{$table->foto}}" style="width:145px" />
-                                            <?php 
-                                            
-                                            } else { ?>
-                                                <img src="../public/images/empty.png" style="width:145px" />
+                                      <table>
+                                        <tr>
+                                            <td>
+                                                <?php
+                                                if(!empty($table->foto)){?>
+                                                    <img src="../storage/foto/{{$table->foto}}" style="width:145px" />
+                                                <?php 
+                                                
+                                                } else { ?>
+                                                    <img src="../public/images/empty.png" style="width:145px" />
 
-                                            <?php } ?>
-                                             
-                                <h4>{{$table->kode_detail_barang}} <br>{{$table->nama_detail_barang}}</h4>
-                                <p>{{$table->keterangan}}</p>   
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <span><b>NUP / Kode sub barang :</b> {{$table->kode_detail_barang}} </span><br>
+                                                <span><b>Sub barang :</b> {{$table->nama_detail_barang}}</span><br>
+                                                <span><b>Tanggal perolehan :</b> {{$table->tgl_perolehan}}</span><br>
+                                                <span><b>Harga perolehan :</b> {{number_format($table->harga_perolehan, 2)}}</span>
+                                            </td>
+                                        </tr>
+                                      </table>          
                             </td>
                         </tr>
                     </table>
-                    <p><b>History perawatan</b></p>
+                    <p>History perawatan</p>
                    
                     <div class="table-responsive">
                     <table class="table table-striped table-sm">
@@ -36,7 +45,7 @@
                             <th>Lampiran</th>
                         </tr>
                         @if($count==0)
-                            <tr class="table-danger" align="center">
+                            <tr align="center">
                                 <td colspan=4>Belum ada transaksi perawatan</td>
                             </tr>
                         @else
