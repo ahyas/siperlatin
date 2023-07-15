@@ -8,21 +8,18 @@
                 <div class="card-header">Sub barang</div>
                 <div class="card-body">
                 <a class="btn btn-danger btn-sm" href="{{route('barang.index')}}" role="button">Batal</a> <button class="btn btn-primary btn-sm tambah" data-id="{{$table->id}}">Tambah</button>
-                    <p style="padding-top:10px">Referensi barang: {{$table->kode}} <b>{{$table->nama}}</b></p>
+                    <h5 style="line-height:40px">{{$table->kode}} - {{$table->nama}}</h5>
                     <table class="table table-striped table-fixed">
-                    <thead>
-                        <tr>
-                            <th width="15px">No.</th>
-                            <th width="100px">Foto</th>
-                            <th>Kode NUP</th>
-                            <th>Nama sub barang</th>
-                            <th>Tanggal perolehan</th>
-                            <th>Harga perolehan</th>
-                            <th>Satuan</th>
-                            <th></th>
+                        <tr style="font-weight:bold">
+                            <td width="15px">No.</td>
+                            <td width="100px">Foto</td>
+                            <td>Kode NUP</td>
+                            <td>Nama sub barang</td>
+                            <td>Tanggal perolehan</td>
+                            <td align="right">Harga perolehan</td>
+                            <td>Satuan</td>
+                            <td></td>
                         </tr>
-                    </thead>
-                    <tbody>
                         @if($info=="")
                             @php 
                                 $num=1;
@@ -44,7 +41,7 @@
                                     <td>{{$row->kode}}</td>
                                     <td>{{$row->nama}}</td>
                                     <td>{{$row->tgl_perolehan}}</td>
-                                    <td>{{$row->harga_perolehan}}</td>
+                                    <td align="right">{{number_format($row->harga_perolehan, 2)}}</td>
                                     <td>{{$row->nama_satuan}}</td>
                                     <td align="right"><a class="btn btn-primary btn-sm" href="{{route('barang.detail.edit', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button">Edit</a> <a class="btn btn-danger btn-sm" href="{{route('barang.detail.delete', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
                                 </tr>
@@ -57,7 +54,6 @@
                             <td colspan="8" align="center" class="table-danger">{{$info}}</td>
                         </tr>
                         @endif
-                        </tbody>
                     </table>
                 </div>
             </div>

@@ -26,7 +26,7 @@
                         </tr>
                     </table>
                     <p><b>History perawatan</b></p>
-
+                   
                     <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <tr>
