@@ -11,7 +11,7 @@
                     <form method="POST" action="{{route('barang.detail.simpan',['id_barang'=>$table->id])}}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">NUP</label>
+                            <label class="col-sm-2 col-form-label">NUP / Kode sub barang</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="kode_barang" value="{{$kode}}" readonly>
                             </div>

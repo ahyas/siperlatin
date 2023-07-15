@@ -9,7 +9,8 @@
                 <div class="card-body">
                 <a class="btn btn-danger btn-sm" href="{{route('barang.index')}}" role="button">Batal</a> <button class="btn btn-primary btn-sm tambah" data-id="{{$table->id}}">Tambah</button>
                     <p style="padding-top:10px">Referensi barang: {{$table->kode}} <b>{{$table->nama}}</b></p>
-                    <table class="table table-striped">
+                    <table class="table table-striped table-fixed">
+                    <thead>
                         <tr>
                             <th width="15px">No.</th>
                             <th width="100px">Foto</th>
@@ -20,6 +21,8 @@
                             <th>Satuan</th>
                             <th></th>
                         </tr>
+                    </thead>
+                    <tbody>
                         @if($info=="")
                             @php 
                                 $num=1;
@@ -54,6 +57,7 @@
                             <td colspan="8" align="center" class="table-danger">{{$info}}</td>
                         </tr>
                         @endif
+                        </tbody>
                     </table>
                 </div>
             </div>
