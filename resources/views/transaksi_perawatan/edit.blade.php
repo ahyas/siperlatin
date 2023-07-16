@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Edit transaksi</div>
                 <div class="card-body">
-                    <form method="POST" action="{{route('transaksi.update', ['id_transaksi'=>$id_transaksi])}}" enctype="multipart/form-data">
+                    <form method="POST" action="{{route('transaksi_perawatan.update', ['id_transaksi'=>$id_transaksi,'id_detail_barang'=>$id_detail_barang])}}" enctype="multipart/form-data">
                         @csrf
                         
                         <div class="form-group row">
@@ -65,7 +65,7 @@
                         </div>
                         
                         <button type="button" class="btn btn-danger btn-sm batal" onclick="history.back()">Batal</button>
-                        <button type="submit" class="btn btn-primary btn-sm simpan">Update</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
                     </form>
                 </div>
             </div>

@@ -20,13 +20,21 @@ Route::get('/', function () {
 Route::get('login', 'AuthController@showFormLogin')->name('login');
 Route::post('login', 'AuthController@login');
 
-Route::get("detail_barang/{id_detail_barang}", "DetailBarangController@index")->name("detail_barang.index");
+Route::get("transaksi_perawatan/{id_detail_barang}", "TransaksiPerawatanController@detail")->name("transaksi_perawatan.detail");
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('register', 'AuthController@showFormRegister')->name('register');
     Route::post('register', 'AuthController@register');
     Route::get('home', 'HomeController@index')->name('home');
+    
     Route::post("logout", "AuthController@logout")->name("logout");
+
+    Route::get("transaksi_perawatan", "TransaksiPerawatanController@index")->name("transaksi_perawatan.index");
+    Route::get("transaksi_perawatan/{id_detail_barang}/add", "TransaksiPerawatanController@tambah_transaksi")->name("transaksi_perawatan.tambah");
+    Route::post("transaksi_perawatan/{id_detail_barang}/simpan","TransaksiPerawatanController@simpan_transaksi")->name("transaksi_perawatan.simpan");
+    Route::get("transaksi_perawatan/{id_transaksi}/{id_detail_barang}/edit", "TransaksiPerawatanController@edit")->name("transaksi_perawatan.edit");
+    Route::post("transaksi_perawatan/{id_transaksi}/{id_detail_barang}/update", "TransaksiPerawatanController@update")->name("transaksi_perawatan.update");
+    Route::get("transaksi_perawatan/{id_transaksi}/{id_detail_barang}/delete", "TransaksiPerawatanController@delete")->name("transaksi_perawatan.delete");
 
     Route::get("barang/transaksi","TransaksiController@index")->name("barang.transaksi.index");
     Route::get("barang/transaksi/tambah","TransaksiController@index")->name("barang.transaksi.index");
@@ -54,13 +62,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("satuan_barang/{id}/delete", "SatuanBarangController@delete")->name("satuan_barang.delete");
 
     Route::get("transaksi","TransaksiController@index")->name("transaksi.index");
-    Route::get("transaksi/tambah","TransaksiController@tambah")->name("transaksi.tambah");
-    Route::get("transaksi/get_sub_barang","TransaksiController@get_sub_barang")->name("transaksi.get_sub_barang");
-    Route::post("transaki/simpan","TransaksiController@simpan")->name("transaksi.simpan");
-    Route::get("transaksi/{id_transaksi}/edit", "TransaksiController@edit")->name("transaksi.edit");
-    Route::post("transaksi/{id_transaksi}/update", "TransaksiController@update")->name("transaksi.update");
-    Route::get("transaksi/{id_transaksi}/delete", "TransaksiController@delete")->name("transaksi.delete");
-    Route::get("transaksi/{id_transaksi}/view_lampiran", "TransaksiController@view_lampiran")->name("transaksi.view_lampiran");
 
     Route::get("cetak/qrcode", "QRCodeController@index")->name("cetak.qrcode.index");
 });

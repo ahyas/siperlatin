@@ -92,7 +92,7 @@
                                 Transaksi
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{route('transaksi.index')}}">Transaksi perawatan</a>
+                                    <a class="dropdown-item" href="{{route('transaksi_perawatan.index')}}">Perawatan</a>
 
                                 </div>
                             </li>
@@ -103,6 +103,14 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{route('barang.index')}}">Daftar Barang</a>
                                     <a class="dropdown-item" href="{{route('satuan_barang.index')}}">Satuan Barang</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                Laporan
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{route('transaksi.index')}}">Transaksi Perawatan</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
