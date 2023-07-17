@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">Transaksi perawatan barang dan mesin</div>
                 <div class="card-body">
                 
                 <div class="table-responsive">

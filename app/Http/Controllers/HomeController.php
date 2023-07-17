@@ -28,4 +28,14 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function laporan_transaksi(){
+        $table=DB::table("tb_transaksi")
+                ->selectRaw('SUM(tb_transaksi.nominal) AS nominal, tb_barang.nama AS nama_barang' )
+                ->join("tb_barang","tb_transaksi.id_barang","=","tb_barang.id")
+                ->groupBy("tb_barang.nama", "tb_transaksi.id_barang")
+                ->get();
+
+        return response()->json($table);
+    }
+
 }

@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('register', 'AuthController@showFormRegister')->name('register');
     Route::post('register', 'AuthController@register');
     Route::get('home', 'HomeController@index')->name('home');
+    Route::get("home/laporan_transaksi","HomeController@laporan_transaksi")->name("home.laporan");
     
     Route::post("logout", "AuthController@logout")->name("logout");
 
