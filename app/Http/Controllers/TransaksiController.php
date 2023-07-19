@@ -20,7 +20,11 @@ class TransaksiController extends Controller
         ->join("tb_detail_barang","tb_transaksi.id_sub_barang","=","tb_detail_barang.id")
         ->sum("tb_transaksi.nominal");
 
-        return view("transaksi/index", compact("table","total"));
+        $barang=DB::table("tb_barang")
+        ->select("nama AS nama_barang","id AS id_barang")
+        ->get();
+
+        return view("laporan/transaksi/index", compact("table","total","barang"));
     }
 
     public function tambah(){

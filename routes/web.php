@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("transaksi_perawatan/{id_transaksi}/{id_detail_barang}/edit", "TransaksiPerawatanController@edit")->name("transaksi_perawatan.edit");
     Route::post("transaksi_perawatan/{id_transaksi}/{id_detail_barang}/update", "TransaksiPerawatanController@update")->name("transaksi_perawatan.update");
     Route::get("transaksi_perawatan/{id_transaksi}/{id_detail_barang}/delete", "TransaksiPerawatanController@delete")->name("transaksi_perawatan.delete");
+    Route::get("transaksi_perawatan/daftar_barang", "TransaksiPerawatanController@get_sub_barang")->name("transaksi_perawatan.get_sub_barang");
 
     Route::get("barang/transaksi","TransaksiController@index")->name("barang.transaksi.index");
     Route::get("barang/transaksi/tambah","TransaksiController@index")->name("barang.transaksi.index");
@@ -62,7 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post("satuan_barang/{id}/update", "SatuanBarangController@update")->name("satuan_barang.update");
     Route::get("satuan_barang/{id}/delete", "SatuanBarangController@delete")->name("satuan_barang.delete");
 
-    Route::get("transaksi","TransaksiController@index")->name("transaksi.index");
+    Route::get("laporan/transaksi","TransaksiController@index")->name("laporan.transaksi.index");
 
     Route::get("cetak/qrcode", "QRCodeController@index")->name("cetak.qrcode.index");
 });

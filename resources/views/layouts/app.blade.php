@@ -110,7 +110,7 @@
                                 Laporan
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{route('transaksi.index')}}">Transaksi Perawatan</a>
+                                    <a class="dropdown-item" href="{{route('laporan.transaksi.index')}}">Transaksi Perawatan</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

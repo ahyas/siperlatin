@@ -21,41 +21,37 @@
 <script type="text/javascript">
     $(document).ready(function(){
 
-        var dataPoints = []
-        var chart = new CanvasJS.Chart("chartContainer", {
+        var dataPoints = [];
+        var chart = new CanvasJS.Chart("chartContainer",{
             animationEnabled: true,
-            theme: "light2", // "light1", "light2", "dark1", "dark2"
-            title:{
-                text: "Top Oil Reserves"
+            theme: "light2",
+            title: {
+                text: "Laporan transaksi perawatan barang"
             },
             axisY: {
-                title: "Reserves(MMbbl)"
+                title: "Total",
+                titleFontSize: 24,
+                includeZero: true
             },
-            data: [{        
-                type: "column",  
-                showInLegend: true, 
-                legendMarkerColor: "grey",
-                legendText: "MMbbl = one million barrels",
-                dataPoints: dataPoints,
+            data: [{
+                type: "column",
+                yValueFormatString: "Rp #,###",
+                dataPoints: dataPoints
             }]
         });
 
-        $.ajax({
-            url:"{{route('home.laporan')}}",
-            type:"GET",
-            dataType:"JSON",
-            success:function(data){
-                console.log(data);
-                
-                    dataPoints.push(
-                        {
-                            
-                    );
+        $.getJSON("{{route('home.laporan')}}", function(data) {  
 
-                chart.render();
+            for (var i = 0; i < data.length; i++) {
+                dataPoints.push({
+                    label: data[i].nama_barang,
+                    y: parseInt(data[i].nominal)
+                });
             }
+            chart.render();
+            
         });
-        
+                
     
     });
 </script>

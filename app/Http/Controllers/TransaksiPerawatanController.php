@@ -84,11 +84,6 @@ class TransaksiPerawatanController extends Controller
     }
 
     public function edit($id_transaksi, $id_detail_barang){
-        $tb_barang = DB::table("tb_barang")
-        ->select("tb_barang.id","tb_barang.nama as nama_barang")
-        ->join("tb_detail_barang","tb_barang.id","=","tb_detail_barang.id_barang")
-        ->distinct()
-        ->get();
 
         $tb_transaksi = DB::table("tb_transaksi")
         ->where("tb_transaksi.id",$id_transaksi)
@@ -97,10 +92,16 @@ class TransaksiPerawatanController extends Controller
         ->join("tb_detail_barang","tb_transaksi.id_sub_barang","=","tb_detail_barang.id")
         ->first();
 
+        $tb_barang = DB::table("tb_barang")
+        ->where("tb_detail_barang.id", $id_detail_barang)
+        ->select("tb_barang.id AS id_barang","tb_barang.nama as nama_barang")
+        ->join("tb_detail_barang","tb_barang.id","=","tb_detail_barang.id_barang")
+        ->first();
+
         $tb_detail_barang = DB::table("tb_detail_barang")
-        ->select("nama","id")
+        ->select("nama","id","kode")
         ->where("id_barang", $tb_transaksi->id_barang)
-        ->get();
+        ->first();
 
         return view("transaksi_perawatan/edit", compact("tb_barang", "tb_transaksi", "tb_detail_barang","id_transaksi","id_detail_barang"));
     }
@@ -130,7 +131,7 @@ class TransaksiPerawatanController extends Controller
             ->where("id",$id_transaksi)
             ->update([
                 "id_barang"=>$request->barang,
-                "id_sub_barang"=>$request->sub_barang,
+                "id_sub_barang"=>$id_detail_barang,
                 "tanggal"=>$request->tanggal,
                 "keterangan"=>$request->keterangan,
                 "nominal"=>$request->nominal,
@@ -165,5 +166,14 @@ class TransaksiPerawatanController extends Controller
         ->delete();
 
         return redirect()->route("transaksi_perawatan.detail", ["id_detail_barang"=>$id_detail_barang]);
+    }
+
+    public function get_sub_barang(Request $request){
+        $table=DB::table("tb_detail_barang")
+        ->select("id","kode","nama")
+        ->where("id_barang",$request->id_barang)
+        ->get();
+
+        return response()->json($table);
     }
 }
