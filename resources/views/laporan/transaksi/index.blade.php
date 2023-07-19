@@ -27,6 +27,7 @@
                             </div>
                         </div>
                     </form>
+                    <a href="{{route('laporan.transaksi.print')}}" class="btn btn-success btn-sm" role="button">Print</a>
                     <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <tr>
