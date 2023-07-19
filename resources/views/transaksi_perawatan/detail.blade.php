@@ -24,13 +24,15 @@
                     </tr>
                     </table>
                 </div>
-                    <span><b>Barang :</b> {{$table->nama_barang}} </span><br>
+                        <div style="margin-bottom:15px">
+                            <span><b>Barang :</b> {{$table->nama_barang}} </span><br>
                             <span><b>NUP / Kode sub barang :</b> {{$table->kode_detail_barang}} </span><br>
                             <span><b>Sub barang :</b> {{$table->nama_detail_barang}}</span><br>
                             <span><b>Tanggal perolehan :</b> {{$table->tgl_perolehan}}</span><br>
                             <span><b>Harga perolehan :</b> {{number_format($table->harga_perolehan, 2)}}</span>
+                        </div>
                     @if(Auth::check())
-                    <div style="margin-bottom:15px; margin-top:15px">          
+                    <div style="margin-bottom:15px;">          
                         <a href="{{route('transaksi_perawatan.tambah',['id_detail_barang'=>$id_detail_barang])}}" class="btn btn-primary btn-sm" role="button">Tambah</a> <a href="{{route('transaksi_perawatan.index')}}" class="btn btn-danger btn-sm" role="button">Kembali</a>
                     </div>
                     @endif
