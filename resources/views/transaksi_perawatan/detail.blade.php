@@ -7,10 +7,10 @@
             <div class="card">
             <div class="card-header">History transaksi perawatan</div>
                 <div class="card-body">
-                
+                <div class="table-responsive">
                     <table class="table">
                     <tr>
-                        <td width="150px">
+                        <td>
                             <?php
                             if(!empty($table->foto)){?>
                                 <img src="../storage/foto/{{$table->foto}}" style="width:300px" />
@@ -21,17 +21,16 @@
 
                             <?php } ?>
                         </td>
-                        <td>
-                            <span><b>Barang :</b> {{$table->nama_barang}} </span><br>
+                    </tr>
+                    </table>
+                </div>
+                    <span><b>Barang :</b> {{$table->nama_barang}} </span><br>
                             <span><b>NUP / Kode sub barang :</b> {{$table->kode_detail_barang}} </span><br>
                             <span><b>Sub barang :</b> {{$table->nama_detail_barang}}</span><br>
                             <span><b>Tanggal perolehan :</b> {{$table->tgl_perolehan}}</span><br>
                             <span><b>Harga perolehan :</b> {{number_format($table->harga_perolehan, 2)}}</span>
-                        </td>
-                    </tr>
-                    </table>
                     @if(Auth::check())
-                    <div style="margin-bottom:15px">          
+                    <div style="margin-bottom:15px; margin-top:15px">          
                         <a href="{{route('transaksi_perawatan.tambah',['id_detail_barang'=>$id_detail_barang])}}" class="btn btn-primary btn-sm" role="button">Tambah</a> <a href="{{route('transaksi_perawatan.index')}}" class="btn btn-danger btn-sm" role="button">Kembali</a>
                     </div>
                     @endif

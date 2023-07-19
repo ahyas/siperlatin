@@ -34,7 +34,6 @@
                         <td colspan="3">
                             <table style="width:100%; margin-left:20px" class="table table-bordered">
                                 <tr style="font-weight:bold" class="table-danger">
-                                    <td></td>
                                     <td>NUP / Kode sub barang</td>
                                     <td>Nama sub barang</td>
                                     <td align="right">Subtotal perawatan</d>
@@ -43,17 +42,7 @@
                                 @foreach($table as $item)
                                     @if($item->id_barang == $row->id_barang)
                                             <tr>
-                                                <td width="100px">
-                                                    <?php
-                                                    if(!empty($item->foto)){?>
-                                                        <img src="storage/foto/{{$item->foto}}" style="width:90px" />
-                                                    <?php 
-                                                    
-                                                    } else { ?>
-                                                        <img src="public/images/empty.png" style="width:90px" />
-
-                                                    <?php } ?>
-                                                </td>
+                                                
                                                 <td>
                                                     {{$item->kode_detail_barang}} <br>
                                                 </td>   
