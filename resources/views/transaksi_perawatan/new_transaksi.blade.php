@@ -53,8 +53,7 @@
                             </div>
                         </div>
                         
-                        <a href="{{route('transaksi_perawatan.detail',['id_detail_barang'=>$id_detail_barang])}}" class="btn btn-danger btn-sm" role="button">Kembali</a>
-                        <button type="submit" class="btn btn-primary btn-sm simpan">Simpan</button>
+                        <button type="submit" class="btn btn-primary btn-sm simpan">Simpan</button> <a href="{{route('transaksi_perawatan.detail',['id_detail_barang'=>$id_detail_barang])}}" class="btn btn-danger btn-sm" role="button">Kembali</a>
                     </form>
                 </div>
             </div>

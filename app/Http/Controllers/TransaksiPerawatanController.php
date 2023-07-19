@@ -153,13 +153,19 @@ class TransaksiPerawatanController extends Controller
     }
 
     public function delete($id_transaksi, $id_detail_barang){
-        $previous_file = DB::table("tb_transaksi")
+        $exist = DB::table("tb_transaksi")
         ->where("id",$id_transaksi)
         ->select("file_name")
         ->first();
 
-        //delete related file
-        unlink(storage_path('files/'.$previous_file->file_name));
+        if(file_exists(storage_path().'/files/'.$exist->file_name)){
+            $previous_file = DB::table("tb_transaksi")
+            ->where("id",$id_transaksi)
+            ->select("file_name")
+            ->first();
+            //delete related file
+            unlink(storage_path('files/'.$previous_file->file_name));
+        }
 
         DB::table("tb_transaksi")
         ->where("id",$id_transaksi)

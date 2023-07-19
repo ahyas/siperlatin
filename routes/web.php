@@ -67,4 +67,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("laporan/transakai/print", "TransaksiController@print_transaksi")->name("laporan.transaksi.print");
 
     Route::get("cetak/qrcode", "QRCodeController@index")->name("cetak.qrcode.index");
+    Route::get("cetak/qrcode/print", "QRCodeController@print")->name("cetak.qrcode.print");
 });

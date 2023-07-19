@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Laporan transaksi perawatan barang</div>
                 <div class="card-body">
-                <form action="{{route('barang.pencarian')}}" method="GET">
+                <!--<form action="{{route('barang.pencarian')}}" method="GET">
                     <span">Filter</span>
                         <div class="form-row">
                             
@@ -26,8 +26,8 @@
                                 <button type="button" class="btn btn-danger btn-block reset btn-sm">Reset</button>
                             </div>
                         </div>
-                    </form>
-                    <a href="{{route('laporan.transaksi.print')}}" class="btn btn-success btn-sm" role="button">Print</a>
+                    </form>-->
+                    <a href="{{route('laporan.transaksi.print')}}" class="btn btn-success btn-sm" role="button" target="_blank" style="margin-bottom:15px">Print PDF</a>
                     <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <tr>
@@ -54,9 +54,8 @@
                             @endforeach
                         <tr class="table-danger">
                             <td colspan="2" align="center"><b>Total</b></td>
+                            <td></td>
                             <td><b><?php echo number_format((float)$total, 2, ',', '.'); ?></b></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                     </table>
                     <p>Halaman : <b>{{ $table->currentPage() }}</b> Jumlah Data : <b>{{ $table->total() }}</b></p>

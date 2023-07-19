@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header">Cetak QR Code</div>
                 <div class="card-body">
+                    <a href="{{route('cetak.qrcode.print')}}" class="btn btn-success btn-sm" role="button" style="margin-bottom:15px" target="_blank">Print PDF</a>
                 <div class="table-responsive">
                     <table style="width:100%">
                     @foreach($table as $key => $item)
@@ -16,7 +17,7 @@
                         @endif
 
                         <td style="padding-bottom:15px; text-align:center">
-                            <?php $url = "www.siperlatin.pta-papuabarat.go.id/detail_barang/".$item->id_detail_barang; ?>
+                            <?php $url = "www.siperlatin.pta-papuabarat.go.id/transaksi_perawatan/".$item->id_detail_barang; ?>
                             {!! QrCode::size(90)->generate($url); !!}<br>
                             <span>{{ $item->kode_detail_barang }}</span><br>
                             <span>{{ $item->nama_detail_barang }}</span>

@@ -22,14 +22,19 @@
                             <?php } ?>
                         </td>
                         <td>
+                            <span><b>Barang :</b> {{$table->nama_barang}} </span><br>
                             <span><b>NUP / Kode sub barang :</b> {{$table->kode_detail_barang}} </span><br>
                             <span><b>Sub barang :</b> {{$table->nama_detail_barang}}</span><br>
                             <span><b>Tanggal perolehan :</b> {{$table->tgl_perolehan}}</span><br>
                             <span><b>Harga perolehan :</b> {{number_format($table->harga_perolehan, 2)}}</span>
                         </td>
                     </tr>
-                    </table>          
-                    <a href="{{route('transaksi_perawatan.tambah',['id_detail_barang'=>$id_detail_barang])}}" class="btn btn-primary btn-sm" role="button">Tambah</a> <a href="{{route('transaksi_perawatan.index')}}" class="btn btn-danger btn-sm" role="button">Kembali</a>
+                    </table>
+                    @if(Auth::check())
+                    <div style="margin-bottom:15px">          
+                        <a href="{{route('transaksi_perawatan.tambah',['id_detail_barang'=>$id_detail_barang])}}" class="btn btn-primary btn-sm" role="button">Tambah</a> <a href="{{route('transaksi_perawatan.index')}}" class="btn btn-danger btn-sm" role="button">Kembali</a>
+                    </div>
+                    @endif
                     
                     <div class="table-responsive">
                     <table class="table table-striped table-sm">
@@ -53,9 +58,11 @@
                                 <td>{{$row->keterangan}}</td>
                                 <td><?php echo number_format((float)$row->nominal, 2, ',', '.'); ?></td>
                                 <td><a href="../storage/files/{{$row->file_name}}" target="_blank">{{$row->file_name}}</a></td>
+                                @if(Auth::check())
                                 <td>
                                     <button class="btn btn-primary btn-sm edit" data-id_transaksi="{{$row->kode_transaksi}}" data-id_detail_barang="{{$id_detail_barang}}">Edit</button> <button class="btn btn-danger btn-sm delete" data-id_transaksi="{{$row->kode_transaksi}}" data-id_detail_barang="{{$id_detail_barang}}">Hapus</button>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
                             
@@ -64,7 +71,9 @@
                             <td colspan="3" align="center"><b>Total</b></td>
                             <td><b><?php echo number_format((float)$total, 2, ',', '.'); ?></b></td>
                             <td></td>
+                            @if(Auth::check())
                             <td></td>
+                            @endif
                         </tr>
                     </table>
                     </div>
