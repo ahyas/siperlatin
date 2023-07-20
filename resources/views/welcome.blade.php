@@ -82,8 +82,6 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
                     @endauth
                 </div>
             @endif
@@ -96,6 +94,7 @@
                     <span style="font-weight:bold; font-size: 50px">Siperlatin <span class="badge badge-danger" style="font-size:15px;">v 1.1</span></span><br>
                 </div>
                 <div style="font-weight:bold; font-size: 15px"><b>Sistem Perawatan Peralatan dan Mesin</b></div>
+                <a href="{{ route('login') }}" class="btn btn-primary btn-sm btn-block" role="button">Login</a>
                 <!--<div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
