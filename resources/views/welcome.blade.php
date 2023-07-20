@@ -93,9 +93,9 @@
                 <h5 style="font-weight:bold">PENGADILAN TINGGI AGAMA</h5>
                 <h5 style="font-weight:bold">PAPUA BARAT</h5>
                     <img src="public/images/new logo.png" style="width:300px"><br>
-                    <span style="font-weight:bold; font-size: 60px">Siperlatin <span class="badge badge-danger" style="font-size:20px;">v 1.1</span></span><br>
+                    <span style="font-weight:bold; font-size: 50px">Siperlatin <span class="badge badge-danger" style="font-size:15px;">v 1.1</span></span><br>
                 </div>
-                <div style="font-weight:bold; line-height: 45px; font-size: 20px"><b>Sistem Perawatan Peralatan dan Mesin</b></div>
+                <div style="font-weight:bold; font-size: 15px"><b>Sistem Perawatan Peralatan dan Mesin</b></div>
                 <!--<div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
