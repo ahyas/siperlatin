@@ -90,11 +90,11 @@
                 <div class="title" style="line-height:70px">
                 <h5 style="font-weight:bold">PENGADILAN TINGGI AGAMA</h5>
                 <h5 style="font-weight:bold">PAPUA BARAT</h5>
-                    <img src="public/images/new logo.png" style="width:300px"><br>
+                    <img src="public/images/new logo.png" style="width:250px"><br>
                     <span style="font-weight:bold; font-size: 50px">Siperlatin <span class="badge badge-danger" style="font-size:15px;">v 1.1</span></span><br>
                 </div>
                 <div style="font-weight:bold; font-size: 15px"><b>Sistem Perawatan Peralatan dan Mesin</b></div>
-                <a href="{{ route('login') }}" class="btn btn-primary btn-sm btn-block" role="button">Login</a>
+                <a href="{{ route('login') }}" class="btn btn-primary btn-sm btn-block" role="button" style="margin-top:10px">Login</a>
                 <!--<div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
