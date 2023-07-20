@@ -90,8 +90,10 @@
 
             <div class="content" style="background-color:#bfe8ff; padding:20px; border-radius: 10px; border:1px solid #0a4293">
                 <div class="title" style="line-height:70px">
-                    <img src="public/images/logo.png" style="width:150px"><br>
-                    <span style="font-weight:bold">Siperlatin <span class="badge badge-danger" style="font-size:20px;">v 1.1</span></span><br>
+                <h5 style="font-weight:bold">PENGADILAN TINGGI AGAMA</h5>
+                <h5 style="font-weight:bold">PAPUA BARAT</h5>
+                    <img src="public/images/new logo.png" style="width:300px"><br>
+                    <span style="font-weight:bold; font-size: 60px">Siperlatin <span class="badge badge-danger" style="font-size:20px;">v 1.1</span></span><br>
                 </div>
                 <div style="font-weight:bold; line-height: 45px; font-size: 20px"><b>Sistem Perawatan Peralatan dan Mesin</b></div>
                 <!--<div class="links">
