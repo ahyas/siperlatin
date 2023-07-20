@@ -172,7 +172,7 @@
         <script src="//cdn.datatables.net/plug-ins/1.10.25/api/sum().js"></script>
         @stack('scripts')
         <div class="footer">
-            <p>Copyright &copy; Pengadilan Tinggi Agama Papua Barat. Jl. Brawijaya, Kelurahan Manokwari Timur, Distrik Manokwari,
+            <p>Copyright &copy; Siperlatin versi 1.1.  Pengadilan Tinggi Agama Papua Barat. Jl. Brawijaya, Kelurahan Manokwari Timur, Distrik Manokwari,
 
 Provinsi Papua Barat. Kode POS 98311.</p>
         </div>

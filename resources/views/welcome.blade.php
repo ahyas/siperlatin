@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -88,11 +89,11 @@
             @endif
 
             <div class="content" style="background-color:#bfe8ff; padding:20px; border-radius: 10px; border:1px solid #0a4293">
-                <div class="title m-b-md" style="line-height:70px">
+                <div class="title" style="line-height:70px">
                     <img src="public/images/logo.png" style="width:150px"><br>
-                    <b>Siperlatin</b><br>
+                    <span style="font-weight:bold">Siperlatin <span class="badge badge-danger" style="font-size:20px;">v 1.1</span></span><br>
                 </div>
-                <div class="subtitle"><b>Sistem Perawatan Peralatan dan Mesin</b></div>
+                <div style="font-weight:bold; line-height: 45px; font-size: 20px"><b>Sistem Perawatan Peralatan dan Mesin</b></div>
                 <!--<div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
