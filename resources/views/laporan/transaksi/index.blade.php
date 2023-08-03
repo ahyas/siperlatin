@@ -7,27 +7,31 @@
             <div class="card">
                 <div class="card-header">Laporan transaksi perawatan barang</div>
                 <div class="card-body">
-                <!--<form action="{{route('barang.pencarian')}}" method="GET">
-                    <span">Filter</span>
-                        <div class="form-row">
-                            
-                            <div class="col-10  ">
-                                <select class="form-control input-sm" style="margin-bottom:15px">
-                                    <option value="0">Pilih barang</option>
-                                    @foreach($barang as $row)
-                                        <option value="{{$row->id_barang}}">{{$row->nama_barang}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col">
-                                <button type="submit" class="btn btn-primary btn-block btn-sm">Cari</button>
-                            </div>
-                            <div class="col">
-                                <button type="button" class="btn btn-danger btn-block reset btn-sm">Reset</button>
-                            </div>
-                        </div>
-                    </form>-->
-                    <a href="{{route('laporan.transaksi.print')}}" class="btn btn-success btn-sm" role="button" target="_blank" style="margin-bottom:15px">Print PDF</a>
+
+                    <form class="form-inline" method="GET" action="{{route('laporan.transaksi.cari')}}">
+                        @csrf
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="inputPassword2" class="sr-only">Password</label>
+                        <input type="text" class="form-control" placeholder="Dari tanggal" name="dari_tanggal" id="dari_tanggal" value="{{ old('dari_tanggal', request()->input('dari_tanggal'))}}">
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="inputPassword2" class="sr-only">Password</label>
+                        <input type="text" class="form-control" placeholder="Sampai tanggal" name="sampai_tanggal" id="sampai_tanggal" value="{{ old('sampai_tanggal', request()->input('sampai_tanggal'))}}">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2" id="cari">Cari</button>
+                    
+                    @if(isset($dari_tgl) || isset($sampai_tgl))
+                        <a href="{{route('laporan.transaksi.index')}}" class="btn btn-success mb-2" role="button" style="margin-left:15px" >Semua</a>
+                        <a href="{{route('laporan.transaksi.print', ['dari_tgl'=>$dari_tgl,'sampai_tgl'=>$sampai_tgl])}}" class="btn btn-danger mb-2" role="button" target="_blank" style="margin-left:15px">Print</a>
+                    @else
+                        <a href="" class="btn btn-success disabled mb-2" role="button" style="margin-left:15px" disabled>Semua</a>
+                    @endif
+                    
+                    </form>
+
+                    
+                    
+
                     <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <tr>
@@ -71,7 +75,20 @@
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function(){
+        $('#dari_tanggal').datepicker({                      
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+        }); 
+        $('#sampai_tanggal').datepicker({                      
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+        }); 
 
+        var dari_tgl = $("#dari_tanggal").val();
+        var sampai_tgl = $("#sampai_tanggal").val();
+        console.log(dari_tgl);
+        console.log(sampai_tgl);
+        
     });
 </script>
 @endpush

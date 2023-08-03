@@ -64,7 +64,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("satuan_barang/{id}/delete", "SatuanBarangController@delete")->name("satuan_barang.delete");
 
     Route::get("laporan/transaksi","TransaksiController@index")->name("laporan.transaksi.index");
-    Route::get("laporan/transakai/print", "TransaksiController@print_transaksi")->name("laporan.transaksi.print");
+    Route::get("laporan/transaksi/cari", "TransaksiController@cari")->name("laporan.transaksi.cari");
+    Route::get("laporan/transakai/print/{dari_tgl}/{sampai_tgl}", "TransaksiController@print_transaksi")->name("laporan.transaksi.print");
 
     Route::get("cetak/qrcode", "QRCodeController@index")->name("cetak.qrcode.index");
     Route::get("cetak/qrcode/print", "QRCodeController@print")->name("cetak.qrcode.print");
