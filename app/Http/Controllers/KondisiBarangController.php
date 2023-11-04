@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Session;
 
 class KondisiBarangController extends Controller
 {
@@ -48,10 +49,18 @@ class KondisiBarangController extends Controller
     }
 
     public function hapus($id){
-        DB::table("tb_kondisi_barang")
-        ->where("id",$id)
-        ->delete();
-
-        return redirect()->back();  
+        $count=DB::table("tb_detail_barang")
+        ->where("id_kondisi_barang",$id)
+        ->count();
+        if($count==0){
+            DB::table("tb_kondisi_barang")
+            ->where("id",$id)
+            ->delete();
+            Session::flash('success', 'Sukses. Data berhasil dihapus.');
+            return redirect()->back();  
+        }else{
+            Session::flash('error', 'Error. Data ini sudah digunakan.');
+            return redirect()->back();
+        }
     }
 }

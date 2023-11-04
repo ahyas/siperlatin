@@ -7,6 +7,23 @@
             <div class="card">
                 <div class="card-header">Kondisi barang</div>
                 <div class="card-body">
+                @if (session('error'))
+                <div class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
+                @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                     <a class="btn btn-primary btn-sm" href="{{route('kondisi_barang.add')}}" role="button" style="margin-bottom:10px;">Tambah</a>
 
                     <div class="table-responsive">
