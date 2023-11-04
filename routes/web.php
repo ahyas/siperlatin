@@ -63,6 +63,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post("satuan_barang/{id}/update", "SatuanBarangController@update")->name("satuan_barang.update");
     Route::get("satuan_barang/{id}/delete", "SatuanBarangController@delete")->name("satuan_barang.delete");
 
+    Route::get("kondisi_barang", "KondisiBarangController@index")->name("kondisi_barang.index");
+    Route::get("kondisi_barang/add", "KondisiBarangController@add")->name("kondisi_barang.add");
+    Route::post("kondisi_barang/save", "KondisiBarangController@save")->name("kondisi_barang.save");
+    Route::get("kondisi_barang/{id}/edit", "KondisiBarangController@edit")->name("kondisi_barang.edit");
+    Route::post("kondisi_barang/{id}/update", "KondisiBarangController@update")->name("kondisi_barang.update");
+    Route::get("kondisi_barang/{id}/hapus", "KondisiBarangController@hapus")->name("kondisi_barang.hapus");
+
     Route::get("laporan/transaksi","TransaksiController@index")->name("laporan.transaksi.index");
     Route::get("laporan/transaksi/cari", "TransaksiController@cari")->name("laporan.transaksi.cari");
     Route::get("laporan/transakai/print/{dari_tgl}/{sampai_tgl}", "TransaksiController@print_transaksi")->name("laporan.transaksi.print");

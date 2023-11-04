@@ -22,8 +22,9 @@
                                 <input type="text" class="form-control" name="nama_barang" value="{{$table->nama}}">
                             </div>
                         </div>
+                        
+                        <button type="button" class="btn btn-danger btn-sm batal" onclick="history.back()">Kembali</button>
                         <button type="submit" class="btn btn-primary btn-sm simpan">Update</button>
-                        <button type="button" class="btn btn-danger btn-sm batal" onclick="history.back()">Batal</button>
                     </form>
                 </div>
             </div>

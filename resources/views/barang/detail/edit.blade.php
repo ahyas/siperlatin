@@ -51,6 +51,17 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Kondisi barang</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="kondisi_barang">
+                                <option value="0">Pilih kondisi barang</option>
+                                @foreach($kondisi_barang as $row)
+                                    <option value="{{$row->id}}">{{$row->keterangan}}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Keterangan</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" name="keterangan" rows="3">{{$table->keterangan}}</textarea>

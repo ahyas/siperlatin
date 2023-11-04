@@ -13,6 +13,7 @@ class BarangController extends Controller
         $table = DB::table("tb_barang")
         ->select("tb_barang.id","tb_barang.kode","tb_barang.nama", DB::raw("count(tb_detail_barang.id_barang) as jumlah_detail_barang"))
         ->leftJoin("tb_detail_barang","tb_barang.id","=","tb_detail_barang.id_barang")
+        
         ->groupBy("tb_barang.id","tb_barang.kode","tb_barang.nama","tb_detail_barang.id_barang")
         ->paginate(10);
 
@@ -42,8 +43,9 @@ class BarangController extends Controller
         
         $detail = DB::table("tb_detail_barang")
         ->where("tb_detail_barang.id_barang",$id_barang)
-        ->select("tb_detail_barang.id","tb_detail_barang.id_barang","tb_detail_barang.nama","tb_detail_barang.kode","tb_detail_barang.tgl_perolehan","tb_detail_barang.harga_perolehan","tb_satuan_barang.nama_satuan","tb_satuan_barang.id AS id_satuan","tb_detail_barang.keterangan","tb_detail_barang.foto")
+        ->select("tb_detail_barang.id","tb_detail_barang.id_barang","tb_detail_barang.nama","tb_detail_barang.kode","tb_detail_barang.tgl_perolehan","tb_detail_barang.harga_perolehan","tb_satuan_barang.nama_satuan","tb_satuan_barang.id AS id_satuan","tb_detail_barang.keterangan","tb_detail_barang.foto","tb_kondisi_barang.nama AS kondisi_barang")
         ->leftJoin("tb_satuan_barang","tb_detail_barang.satuan","=","tb_satuan_barang.id")
+        ->leftJoin("tb_kondisi_barang","tb_detail_barang.id_kondisi_barang","=","tb_kondisi_barang.id")
         ->get();
 
         if($count_detail->count() > 0){
@@ -70,6 +72,10 @@ class BarangController extends Controller
         ->where("id",$id_barang)
         ->first();
 
+        $kondisi_barang = DB::table("tb_kondisi_barang")
+        ->select("nama AS keterangan","id")
+        ->get();
+
         $last_id=DB::table("tb_detail_barang")
         ->where("id_barang",$id_barang)
         ->count();
@@ -80,7 +86,7 @@ class BarangController extends Controller
 
         $kode = $table->kode.".".($last_id+1);
 
-        return view("barang/detail/new", compact("kode","table","satuan_barang"));
+        return view("barang/detail/new", compact("kode","table","satuan_barang","kondisi_barang"));
     }
 
     public function tambah_barang(){
@@ -119,6 +125,7 @@ class BarangController extends Controller
                 "tgl_perolehan"=>$request["tgl_perolehan"],
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
+                "id_kondisi_barang"=>$request["kondisi_barang"],
                 "keterangan"=>$request["keterangan"],
                 "foto"=>$fileName
             ]);
@@ -131,6 +138,7 @@ class BarangController extends Controller
                 "tgl_perolehan"=>$request["tgl_perolehan"],
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
+                "id_kondisi_barang"=>$request["kondisi_barang"],
                 "keterangan"=>$request["keterangan"]
             ]);
         }
@@ -155,6 +163,10 @@ class BarangController extends Controller
         ->where("id",$id_barang)
         ->first();
 
+        $kondisi_barang = DB::table("tb_kondisi_barang")
+        ->select("nama AS keterangan","id")
+        ->get();
+
         $satuan_barang = DB::table("tb_satuan_barang")
         ->select("nama_satuan","id")
         ->get();
@@ -166,7 +178,7 @@ class BarangController extends Controller
         ->where("tb_detail_barang.id", $id_detail)
         ->first();
 
-        return view("barang/detail/edit", compact("table","info_barang","satuan_barang"));
+        return view("barang/detail/edit", compact("table","info_barang","satuan_barang","kondisi_barang"));
     }
 
     public function update(Request $request, $id_barang){
@@ -212,6 +224,7 @@ class BarangController extends Controller
                 "tgl_perolehan"=>$request["tgl_perolehan"],
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
+                "id_kondisi_barang"=>$request["kondisi_barang"],
                 "keterangan"=>$request["keterangan"],
                 "foto"=>$fileName
             ]);
@@ -226,6 +239,7 @@ class BarangController extends Controller
                 "tgl_perolehan"=>$request["tgl_perolehan"],
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
+                "id_kondisi_barang"=>$request["kondisi_barang"],
                 "keterangan"=>$request["keterangan"],
             ]);
         }

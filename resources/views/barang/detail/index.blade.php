@@ -7,9 +7,9 @@
             <div class="card">
                 <div class="card-header">Sub barang</div>
                 <div class="card-body">
-                <a class="btn btn-danger btn-sm" href="{{route('barang.index')}}" role="button">Batal</a> <button class="btn btn-primary btn-sm tambah" data-id="{{$table->id}}">Tambah</button>
+                <a class="btn btn-danger btn-sm" href="{{route('barang.index')}}" role="button">Kembali</a> <button class="btn btn-primary btn-sm tambah" data-id="{{$table->id}}">Tambah</button>
                     <h5 style="line-height:40px">{{$table->kode}} - {{$table->nama}}</h5>
-                    <table class="table table-striped table-fixed">
+                    <table class="table table-striped table-fixed table-sm">
                         <tr style="font-weight:bold">
                             <td width="15px">No.</td>
                             <td width="100px">Foto</td>
@@ -18,6 +18,7 @@
                             <td>Tanggal perolehan</td>
                             <td align="right">Harga perolehan</td>
                             <td>Satuan</td>
+                            <td>Kondisi barang</td>
                             <td></td>
                         </tr>
                         @if($info=="")
@@ -43,6 +44,7 @@
                                     <td>{{$row->tgl_perolehan}}</td>
                                     <td align="right">{{number_format($row->harga_perolehan, 2)}}</td>
                                     <td>{{$row->nama_satuan}}</td>
+                                    <td>{{$row->kondisi_barang}}</td>
                                     <td align="right"><a class="btn btn-primary btn-sm" href="{{route('barang.detail.edit', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button">Edit</a> <a class="btn btn-danger btn-sm" href="{{route('barang.detail.delete', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
                                 </tr>
                                 @php
