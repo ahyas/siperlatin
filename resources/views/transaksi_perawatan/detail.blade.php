@@ -10,14 +10,14 @@
                 <div class="table-responsive">
                     <table class="table">
                     <tr>
-                        <td>
+                        <td>{{$table->foto}}
                             <?php
-                            if(!empty($table->foto)){?>
+                            if(storage_path('foto/{{$table->foto}}')){?>
                                 <img src="../storage/foto/{{$table->foto}}" style="width:300px" />
                             <?php 
                             
                             } else { ?>
-                                <img src="../public/images/empty.png" style="width:300px" />
+                                <img src="{{public_path('images/empty.png')}}" style="width:300px" />
 
                             <?php } ?>
                         </td>

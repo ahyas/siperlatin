@@ -56,6 +56,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get("barang/{id_barang}/detail/{id_detail}/delete","BarangController@delete_detail")->name("barang.detail.delete");
     Route::get("barang/pencarian","BarangController@pencarian")->name("barang.pencarian");
 
+    Route::get('ruang', 'RuangController@index')->name('ruang.index');
+    Route::get('ruang/tambah', 'RuangController@tambah')->name('ruang.tambah');
+    Route::post('ruang/simpan', 'RuangController@simpan')->name('ruang.simpan');
+    Route::get('ruang/{id}/edit', 'RuangController@edit')->name('ruang.edit');
+    Route::post('ruang/{id}/update', 'RuangController@update')->name('ruang.update');
+    Route::get('ruang/{id}/delete', 'RuangController@delete')->name('ruang.delete');
+
     Route::get("satuan_barang", "SatuanBarangController@index")->name("satuan_barang.index");
     Route::get("satuan_barang/tambah", "SatuanBarangController@tambah")->name("satuan_barang.tambah");
     Route::post("satuan_barang/simpan", "SatuanBarangController@simpan")->name("satuan_barang.simpan");

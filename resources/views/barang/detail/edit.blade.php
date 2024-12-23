@@ -51,12 +51,31 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Ruang</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="ruang">
+                                <option value="0">Pilih ruang</option>
+                                    @foreach($ruang as $row)
+                                        @if($row->id == $table->id_ruang)
+                                            <option value="{{$row->id}}" selected>{{$row->nama_ruang}}</option>
+                                        @else
+                                            <option value="{{$row->id}}">{{$row->nama_ruang}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Kondisi barang</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="kondisi_barang">
                                 <option value="0">Pilih kondisi barang</option>
                                 @foreach($kondisi_barang as $row)
-                                    <option value="{{$row->id}}">{{$row->keterangan}}</option>
+                                    @if($row->id == $table->id_kondisi_barang)
+                                        <option value="{{$row->id}}" selected>{{$row->kondisi_barang}}</option>
+                                    @else
+                                        <option value="{{$row->id}}">{{$row->kondisi_barang}}</option>
+                                    @endif
                                 @endforeach
                                 </select>
                             </div>

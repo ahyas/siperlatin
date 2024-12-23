@@ -18,6 +18,7 @@
                             <td>Tanggal perolehan</td>
                             <td align="right">Harga perolehan</td>
                             <td>Satuan</td>
+                            <td>Ruang</td>
                             <td>Kondisi barang</td>
                             <td></td>
                         </tr>
@@ -44,7 +45,16 @@
                                     <td>{{$row->tgl_perolehan}}</td>
                                     <td align="right">{{number_format($row->harga_perolehan, 2)}}</td>
                                     <td>{{$row->nama_satuan}}</td>
-                                    <td>{{$row->kondisi_barang}}</td>
+                                    <td>{{$row->ruang}}</td>
+                                    <td>
+                                        @if($row->id_kondisi_barang == 1)
+                                            <span class="badge badge-success">{{$row->kondisi_barang}}</span>
+                                        @elseif($row->id_kondisi_barang == 2)
+                                            <span class="badge badge-warning">{{$row->kondisi_barang}}</span>
+                                        @else
+                                            <span class="badge badge-danger">{{$row->kondisi_barang}}</span>
+                                        @endif
+                                    </td>
                                     <td align="right"><a class="btn btn-primary btn-sm" href="{{route('barang.detail.edit', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button">Edit</a> <a class="btn btn-danger btn-sm" href="{{route('barang.detail.delete', ['id_barang'=>$table->id, 'id_detail'=>$row->id])}}" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
                                 </tr>
                                 @php

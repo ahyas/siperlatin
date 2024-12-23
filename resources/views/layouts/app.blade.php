@@ -98,12 +98,13 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                                Referensi
+                                Master data
                                 </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{route('barang.index')}}">Daftar Barang</a>
                                     <a class="dropdown-item" href="{{route('satuan_barang.index')}}">Satuan Barang</a>
                                     <a class="dropdown-item" href="{{route('kondisi_barang.index')}}">Kondisi barang</a>
+                                    <a class="dropdown-item" href="{{route('ruang.index')}}">Ruang</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

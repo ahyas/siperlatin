@@ -43,10 +43,24 @@ class BarangController extends Controller
         
         $detail = DB::table("tb_detail_barang")
         ->where("tb_detail_barang.id_barang",$id_barang)
-        ->select("tb_detail_barang.id","tb_detail_barang.id_barang","tb_detail_barang.nama","tb_detail_barang.kode","tb_detail_barang.tgl_perolehan","tb_detail_barang.harga_perolehan","tb_satuan_barang.nama_satuan","tb_satuan_barang.id AS id_satuan","tb_detail_barang.keterangan","tb_detail_barang.foto","tb_kondisi_barang.nama AS kondisi_barang")
+        ->select(
+            "tb_detail_barang.id",
+            "tb_detail_barang.id_barang",
+            "tb_detail_barang.nama",
+            "tb_detail_barang.kode",
+            "tb_detail_barang.tgl_perolehan",
+            "tb_detail_barang.harga_perolehan",
+            "tb_satuan_barang.nama_satuan",
+            "tb_satuan_barang.id AS id_satuan",
+            "tb_detail_barang.id_kondisi_barang",
+            "tb_detail_barang.keterangan",
+            "tb_detail_barang.foto",
+            "tb_kondisi_barang.nama AS kondisi_barang",
+            'tb_ruang.nama_ruang AS ruang')
         ->leftJoin("tb_satuan_barang","tb_detail_barang.satuan","=","tb_satuan_barang.id")
         ->leftJoin("tb_kondisi_barang","tb_detail_barang.id_kondisi_barang","=","tb_kondisi_barang.id")
-        ->get();
+        ->leftJoin('tb_ruang', 'tb_detail_barang.ruang','=','tb_ruang.id')
+        ->get();        
 
         if($count_detail->count() > 0){
             $info="";
@@ -84,9 +98,13 @@ class BarangController extends Controller
         ->select("nama_satuan","id")
         ->get();
 
+        $ruang = DB::table('tb_ruang')
+        ->select('id','nama_ruang', 'keterangan')
+        ->get();
+
         $kode = $table->kode.".".($last_id+1);
 
-        return view("barang/detail/new", compact("kode","table","satuan_barang","kondisi_barang"));
+        return view("barang/detail/new", compact("kode","table","satuan_barang","kondisi_barang",'ruang'));
     }
 
     public function tambah_barang(){
@@ -126,6 +144,7 @@ class BarangController extends Controller
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
                 "id_kondisi_barang"=>$request["kondisi_barang"],
+                "ruang"=>$request["ruang"],
                 "keterangan"=>$request["keterangan"],
                 "foto"=>$fileName
             ]);
@@ -139,6 +158,7 @@ class BarangController extends Controller
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
                 "id_kondisi_barang"=>$request["kondisi_barang"],
+                "ruang"=>$request["ruang"],
                 "keterangan"=>$request["keterangan"]
             ]);
         }
@@ -164,21 +184,37 @@ class BarangController extends Controller
         ->first();
 
         $kondisi_barang = DB::table("tb_kondisi_barang")
-        ->select("nama AS keterangan","id")
+        ->select("nama AS kondisi_barang","id")
         ->get();
 
         $satuan_barang = DB::table("tb_satuan_barang")
         ->select("nama_satuan","id")
         ->get();
 
+        $ruang = DB::table('tb_ruang')
+        ->select('id','nama_ruang', 'keterangan')
+        ->get();
+
         $table=DB::table("tb_detail_barang")
-        ->select("tb_detail_barang.id","tb_detail_barang.id_barang","tb_detail_barang.nama","tb_detail_barang.kode","tb_detail_barang.tgl_perolehan","tb_detail_barang.harga_perolehan","tb_satuan_barang.nama_satuan","tb_satuan_barang.id AS id_satuan","tb_detail_barang.keterangan")
+        ->select(
+            "tb_detail_barang.id",
+            "tb_detail_barang.id_barang",
+            "tb_detail_barang.nama",
+            "tb_detail_barang.kode",
+            "tb_detail_barang.tgl_perolehan",
+            "tb_detail_barang.harga_perolehan",
+            "tb_detail_barang.id_kondisi_barang",
+            "tb_satuan_barang.nama_satuan",
+            "tb_satuan_barang.id AS id_satuan",
+            "tb_detail_barang.ruang AS id_ruang",
+            "tb_detail_barang.keterangan")
         ->leftJoin("tb_satuan_barang","tb_detail_barang.satuan","=","tb_satuan_barang.id")
+        ->leftJoin('tb_ruang', 'tb_detail_barang.ruang','=','tb_ruang.id')
         ->where("tb_detail_barang.id_barang",$id_barang)
         ->where("tb_detail_barang.id", $id_detail)
         ->first();
 
-        return view("barang/detail/edit", compact("table","info_barang","satuan_barang","kondisi_barang"));
+        return view("barang/detail/edit", compact("table","info_barang","satuan_barang","kondisi_barang",'ruang'));
     }
 
     public function update(Request $request, $id_barang){
@@ -225,6 +261,7 @@ class BarangController extends Controller
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
                 "id_kondisi_barang"=>$request["kondisi_barang"],
+                "ruang"=>$request["ruang"],
                 "keterangan"=>$request["keterangan"],
                 "foto"=>$fileName
             ]);
@@ -240,6 +277,7 @@ class BarangController extends Controller
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
                 "id_kondisi_barang"=>$request["kondisi_barang"],
+                "ruang"=>$request["ruang"],
                 "keterangan"=>$request["keterangan"],
             ]);
         }

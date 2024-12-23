@@ -38,7 +38,7 @@
                             @foreach($table as $row)
                             <tr>
                                 <td>{{$row->keterangan}}</td>
-                                <td><a href="{{route('kondisi_barang.edit', ['id'=>$row->id])}}" class="btn btn-primary btn-sm" role="button">Edit</a> <button href="#" class="btn btn-danger btn-sm hapus" data-id="{{$row->id}}">Hapus</button></td>
+                                <td align="right"><a href="{{route('kondisi_barang.edit', ['id'=>$row->id])}}" class="btn btn-primary btn-sm" role="button">Edit</a> <button href="#" class="btn btn-danger btn-sm hapus" data-id="{{$row->id}}">Hapus</button></td>
                             </tr>
                             @endforeach
                         </tbody>

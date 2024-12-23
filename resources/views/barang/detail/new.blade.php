@@ -43,8 +43,23 @@
                                         <option value="{{$row->id}}">{{$row->nama_satuan}}</option>
                                     @endforeach
                                 </select>
+                                <!--<small class="form-text text-muted">Data satuan belum tersedia? <a href=''>Tambah data</a></small>-->
                             </div>
                         </div>
+                        
+                        <div class="form-group row ">
+                            <label class="col-sm-2 col-form-label">Ruang</label>
+                            <div class="col-sm-10">
+                            <select class="form-control" name="ruang">
+                                <option value="0">Pilih ruang</option>
+                                @foreach($ruang as $row)
+                                <option value="{{$row->id}}">{{$row->nama_ruang}}</option>
+                                @endforeach
+                            </select>
+                            <!--<small class="form-text text-muted">Data ruangan belum tersedia? <a href="{{route('ruang.tambah')}}">Tambah data</a></small>-->
+                            </div>
+                        </div>
+                        
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Kondisi barang</label>
                             <div class="col-sm-10">
@@ -54,6 +69,7 @@
                                     <option value="{{$row->id}}">{{$row->keterangan}}</option>
                                 @endforeach
                                 </select>
+                                <!--<small class="form-text text-muted">Data kondisi barang belum tersedia? <a href=''>Tambah data</a></small>-->
                             </div>
                         </div>
                         <div class="form-group row">
