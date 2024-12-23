@@ -10,7 +10,7 @@
                 <div class="table-responsive">
                     <table class="table">
                     <tr>
-                        <td>{{$table->foto}}
+                        <td>
                             <?php
                             if(storage_path('foto/{{$table->foto}}')){?>
                                 <img src="../storage/foto/{{$table->foto}}" style="width:300px" />
@@ -29,7 +29,17 @@
                             <span><b>NUP / Kode sub barang :</b> {{$table->kode_detail_barang}} </span><br>
                             <span><b>Sub barang :</b> {{$table->nama_detail_barang}}</span><br>
                             <span><b>Tanggal perolehan :</b> {{$table->tgl_perolehan}}</span><br>
-                            <span><b>Harga perolehan :</b> {{number_format($table->harga_perolehan, 2)}}</span>
+                            <span><b>Harga perolehan :</b> {{number_format($table->harga_perolehan, 2)}}</span><br>
+                            <span><b>Satuan :</b> {{$table->nama_satuan}}</span><br>
+                            <span><b>Lokasi/Ruang :</b> {{$table->nama_ruang}}</span><br>
+                            <span><b>Kondisi barang :</b> 
+                                        @if($table->id_kondisi_barang == 1)
+                                            <span class="badge badge-success">{{$table->kondisi_barang}}</span>
+                                        @elseif($table->id_kondisi_barang == 2)
+                                            <span class="badge badge-warning">{{$table->kondisi_barang}}</span>
+                                        @else
+                                            <span class="badge badge-danger">{{$table->kondisi_barang}}</span>
+                                        @endif</span>
                         </div>
                     @if(Auth::check())
                     <div style="margin-bottom:15px;">          
@@ -49,7 +59,7 @@
                         </tr>
                         @if($count==0)
                             <tr align="center">
-                                <td colspan=4>Belum ada transaksi perawatan</td>
+                                <td colspan=5>Belum ada transaksi perawatan</td>
                             </tr>
                         @else
                             @foreach($transaksi as $row)
@@ -71,6 +81,7 @@
                         <tr class="table-danger">
                             <td colspan="3" align="center"><b>Total</b></td>
                             <td><b><?php echo number_format((float)$total, 2, ',', '.'); ?></b></td>
+                            <td></td>
                             <td></td>
                             @if(Auth::check())
                             <td></td>

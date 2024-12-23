@@ -25,7 +25,7 @@ class RuangController extends Controller
             'keterangan' => $request['keterangan']
         ]);
 
-        return redirect()->back();
+        return redirect()->route('ruang.index');
     }
 
     public function edit($id){
