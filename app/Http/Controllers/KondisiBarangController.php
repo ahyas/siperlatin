@@ -26,7 +26,10 @@ class KondisiBarangController extends Controller
             "nama"=>$request["keterangan"]
         ]);
 
-        return redirect()->route("kondisi_barang.index");
+        //return redirect()->route('ruang.index');
+        $previous_url = $request['previous_url'];
+
+        return redirect($previous_url)->with('success', 'Data saved successfully!');
     }
 
     public function edit($id){

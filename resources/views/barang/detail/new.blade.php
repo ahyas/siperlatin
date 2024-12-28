@@ -11,12 +11,6 @@
                     <form method="POST" action="{{route('barang.detail.simpan',['id_barang'=>$table->id])}}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">NUP / Kode sub barang</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="kode_barang" value="{{$kode}}" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nama sub barang</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="nama_barang">
@@ -43,7 +37,7 @@
                                         <option value="{{$row->id}}">{{$row->nama_satuan}}</option>
                                     @endforeach
                                 </select>
-                                <!--<small class="form-text text-muted">Data satuan belum tersedia? <a href=''>Tambah data</a></small>-->
+                                <small class="form-text text-muted">Data satuan belum tersedia? <a href="{{route('satuan_barang.tambah')}}">Tambah data</a></small>
                             </div>
                         </div>
                         
@@ -56,10 +50,21 @@
                                 <option value="{{$row->id}}">{{$row->nama_ruang}}</option>
                                 @endforeach
                             </select>
-                            <!--<small class="form-text text-muted">Data ruangan belum tersedia? <a href="{{route('ruang.tambah')}}">Tambah data</a></small>-->
+                            <small class="form-text text-muted">Data ruangan belum tersedia? <a href="{{route('ruang.tambah')}}">Tambah data</a></small>
                             </div>
                         </div>
-                        
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Brand / Merk</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="brand">
+                                <option value="0">Pilih brand /merk</option>
+                                @foreach($brand as $row)
+                                    <option value="{{$row->id}}">{{$row->nama_brand}}</option>
+                                @endforeach
+                                </select>
+                                <small class="form-text text-muted">Data brand belum tersedia? <a href="{{route('brand.tambah')}}">Tambah data</a></small>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Kondisi barang</label>
                             <div class="col-sm-10">
@@ -69,7 +74,7 @@
                                     <option value="{{$row->id}}">{{$row->keterangan}}</option>
                                 @endforeach
                                 </select>
-                                <!--<small class="form-text text-muted">Data kondisi barang belum tersedia? <a href=''>Tambah data</a></small>-->
+                                <small class="form-text text-muted">Data kondisi barang belum tersedia? <a href="{{route('kondisi_barang.add')}}">Tambah data</a></small>
                             </div>
                         </div>
                         <div class="form-group row">

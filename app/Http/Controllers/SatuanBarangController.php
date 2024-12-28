@@ -23,7 +23,9 @@ class SatuanBarangController extends Controller
             "nama_satuan"=>$request->nama_satuan,
             "keterangan"=>$request->keterangan
         ]);
-        return redirect()->route("satuan_barang.index");
+
+        $previous_url = $request['previous_url'];
+        return redirect($previous_url)->with('success', 'Data saved successfully!');
     }
 
     public function edit($id){

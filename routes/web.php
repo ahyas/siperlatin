@@ -63,6 +63,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('ruang/{id}/update', 'RuangController@update')->name('ruang.update');
     Route::get('ruang/{id}/delete', 'RuangController@delete')->name('ruang.delete');
 
+    Route::get('brand', 'BrandController@index')->name('brand.index');
+    Route::get('brand/tambah', 'BrandController@tambah')->name('brand.tambah');
+    Route::post('brand/simpan', 'BrandController@simpan')->name('brand.simpan');
+    Route::get('brand/{id}/edit', 'BrandController@edit')->name('brand.edit');
+    Route::post('brand/{id}/update', 'BrandController@update')->name('brand.update');
+    Route::get('brand/{id}/destroy', 'BrandController@destroy')->name('brand.destroy');
+
     Route::get("satuan_barang", "SatuanBarangController@index")->name("satuan_barang.index");
     Route::get("satuan_barang/tambah", "SatuanBarangController@tambah")->name("satuan_barang.tambah");
     Route::post("satuan_barang/simpan", "SatuanBarangController@simpan")->name("satuan_barang.simpan");

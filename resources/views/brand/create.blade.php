@@ -5,16 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header">Tambah satuan barang</div>
+                <div class="card-header">Tambah brand / merk</div>
                 <div class="card-body">
                     
-                    <form method="POST" action="{{route('satuan_barang.simpan')}}">
+                    <form method="POST" action="{{route('brand.simpan')}}">
                         @csrf
+                        <!--Prvious url to redirect after submission-->
                         <input type='hidden' name='previous_url' value='{{URL::previous()}}' style='width:500px'/>
+                        
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nama satuan</label>
+                            <label class="col-sm-2 col-form-label">Nama brand</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="nama_satuan">
+                                <input type="text" class="form-control" name="nama_brand">
                             </div>
                         </div>
                         <div class="form-group row">

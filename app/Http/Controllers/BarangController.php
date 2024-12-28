@@ -56,10 +56,13 @@ class BarangController extends Controller
             "tb_detail_barang.keterangan",
             "tb_detail_barang.foto",
             "tb_kondisi_barang.nama AS kondisi_barang",
-            'tb_ruang.nama_ruang AS ruang')
+            'tb_ruang.nama_ruang AS ruang',
+            'tb_brand.nama_brand AS brand')
         ->leftJoin("tb_satuan_barang","tb_detail_barang.satuan","=","tb_satuan_barang.id")
         ->leftJoin("tb_kondisi_barang","tb_detail_barang.id_kondisi_barang","=","tb_kondisi_barang.id")
         ->leftJoin('tb_ruang', 'tb_detail_barang.ruang','=','tb_ruang.id')
+        ->leftJoin('tb_brand', 'tb_detail_barang.brand','=','tb_brand.id')
+        ->orderBy('id', 'DESC')
         ->get();        
 
         if($count_detail->count() > 0){
@@ -90,10 +93,6 @@ class BarangController extends Controller
         ->select("nama AS keterangan","id")
         ->get();
 
-        $last_id=DB::table("tb_detail_barang")
-        ->where("id_barang",$id_barang)
-        ->count();
-
         $satuan_barang = DB::table("tb_satuan_barang")
         ->select("nama_satuan","id")
         ->get();
@@ -102,9 +101,11 @@ class BarangController extends Controller
         ->select('id','nama_ruang', 'keterangan')
         ->get();
 
-        $kode = $table->kode.".".($last_id+1);
+        $brand = DB::table('tb_brand')
+        ->select('id','nama_brand', 'keterangan')
+        ->get();
 
-        return view("barang/detail/new", compact("kode","table","satuan_barang","kondisi_barang",'ruang'));
+        return view("barang/detail/new", compact("table","satuan_barang","kondisi_barang",'ruang','brand'));
     }
 
     public function tambah_barang(){
@@ -128,6 +129,19 @@ class BarangController extends Controller
     }
 
     public function simpan_detail(Request $request, $id_barang){
+        $table=DB::table("tb_barang")
+        ->where("id",$id_barang)
+        ->first();
+
+        $last_id=DB::table("tb_detail_barang")
+        ->where('id_barang', $id_barang)
+        ->orderBy('id','DESC')
+        ->first();
+        //get 
+        $a = (int)substr($last_id->kode, -2);
+
+        $kode = $table->kode.".".($a+1);
+
         if($request->hasFile("foto")){
             $fileName = time().'.'.$request->foto->extension();
             
@@ -138,13 +152,14 @@ class BarangController extends Controller
             DB::table("tb_detail_barang")
             ->insert([
                 "id_barang"=>$id_barang,
-                "kode"=>$request["kode_barang"],
+                "kode"=>$kode,
                 "nama"=>$request["nama_barang"],
                 "tgl_perolehan"=>$request["tgl_perolehan"],
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
                 "id_kondisi_barang"=>$request["kondisi_barang"],
                 "ruang"=>$request["ruang"],
+                "brand"=>$request["brand"],
                 "keterangan"=>$request["keterangan"],
                 "foto"=>$fileName
             ]);
@@ -152,18 +167,19 @@ class BarangController extends Controller
             DB::table("tb_detail_barang")
             ->insert([
                 "id_barang"=>$id_barang,
-                "kode"=>$request["kode_barang"],
+                "kode"=>$kode,
                 "nama"=>$request["nama_barang"],
                 "tgl_perolehan"=>$request["tgl_perolehan"],
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
                 "id_kondisi_barang"=>$request["kondisi_barang"],
                 "ruang"=>$request["ruang"],
+                "brand"=>$request["brand"],
                 "keterangan"=>$request["keterangan"]
             ]);
         }
 
-        return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
+        return redirect()->route("barang.detail",["id_barang"=>$id_barang])->with('success', 'Data saved successfully!');
     }
 
     public function edit($id_barang){
@@ -195,18 +211,22 @@ class BarangController extends Controller
         ->select('id','nama_ruang', 'keterangan')
         ->get();
 
+        $brand = DB::table('tb_brand')
+        ->select('id','nama_brand', 'keterangan')
+        ->get();
+
         $table=DB::table("tb_detail_barang")
         ->select(
             "tb_detail_barang.id",
             "tb_detail_barang.id_barang",
             "tb_detail_barang.nama",
-            "tb_detail_barang.kode",
             "tb_detail_barang.tgl_perolehan",
             "tb_detail_barang.harga_perolehan",
             "tb_detail_barang.id_kondisi_barang",
             "tb_satuan_barang.nama_satuan",
             "tb_satuan_barang.id AS id_satuan",
             "tb_detail_barang.ruang AS id_ruang",
+            "tb_detail_barang.brand AS id_brand",
             "tb_detail_barang.keterangan")
         ->leftJoin("tb_satuan_barang","tb_detail_barang.satuan","=","tb_satuan_barang.id")
         ->leftJoin('tb_ruang', 'tb_detail_barang.ruang','=','tb_ruang.id')
@@ -214,7 +234,7 @@ class BarangController extends Controller
         ->where("tb_detail_barang.id", $id_detail)
         ->first();
 
-        return view("barang/detail/edit", compact("table","info_barang","satuan_barang","kondisi_barang",'ruang'));
+        return view("barang/detail/edit", compact("table","info_barang","satuan_barang","kondisi_barang",'ruang','brand'));
     }
 
     public function update(Request $request, $id_barang){
@@ -255,13 +275,13 @@ class BarangController extends Controller
             ->where("id",$id_detail)
             ->where("id_barang", $id_barang)
             ->update([
-                "kode"=>$request["kode_barang"],
                 "nama"=>$request["nama_barang"],
                 "tgl_perolehan"=>$request["tgl_perolehan"],
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
                 "id_kondisi_barang"=>$request["kondisi_barang"],
                 "ruang"=>$request["ruang"],
+                "brand"=>$request["brand"],
                 "keterangan"=>$request["keterangan"],
                 "foto"=>$fileName
             ]);
@@ -271,17 +291,17 @@ class BarangController extends Controller
             ->where("id",$id_detail)
             ->where("id_barang", $id_barang)
             ->update([
-                "kode"=>$request["kode_barang"],
                 "nama"=>$request["nama_barang"],
                 "tgl_perolehan"=>$request["tgl_perolehan"],
                 "harga_perolehan"=>$request["harga_perolehan"],
                 "satuan"=>$request["satuan"],
                 "id_kondisi_barang"=>$request["kondisi_barang"],
                 "ruang"=>$request["ruang"],
+                "brand"=>$request["brand"],
                 "keterangan"=>$request["keterangan"],
             ]);
         }
-        return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
+        return redirect()->route("barang.detail",["id_barang"=>$id_barang])->with('success', 'Data updated successfully!');
     }
 
     public function hapus($id_barang){
@@ -289,7 +309,7 @@ class BarangController extends Controller
         ->where("id",$id_barang)
         ->delete();
 
-        return redirect()->route("barang.index");
+        return redirect()->back()->with('success', 'Data deleted successfully!');
     }
 
     public function delete_detail($id_barang, $id_detail){
@@ -298,7 +318,7 @@ class BarangController extends Controller
         ->where("id",$id_detail)
         ->delete();
 
-        return redirect()->route("barang.detail",["id_barang"=>$id_barang]);
+        return redirect()->route("barang.detail",["id_barang"=>$id_barang])->with('success', 'Data deleted successfully!');
     }
 
     public function pencarian(Request $request){

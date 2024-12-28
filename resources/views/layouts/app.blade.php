@@ -88,7 +88,7 @@
                                 <a class="nav-link active" aria-current="page" href="{{url('/home')}}">Home</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link active dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                 Transaksi
                                 </a>
                                 <div class="dropdown-menu">
@@ -97,18 +97,19 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link active dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                 Master data
                                 </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{route('barang.index')}}">Daftar Barang</a>
                                     <a class="dropdown-item" href="{{route('satuan_barang.index')}}">Satuan Barang</a>
                                     <a class="dropdown-item" href="{{route('kondisi_barang.index')}}">Kondisi barang</a>
-                                    <a class="dropdown-item" href="{{route('ruang.index')}}">Ruang</a>
+                                    <a class="dropdown-item" href="{{route('ruang.index')}}">Daftar Ruang</a>
+                                    <a class="dropdown-item" href="{{route('brand.index')}}">Daftar Brand / Merk</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link active dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                 Laporan
                                 </a>
                                 <div class="dropdown-menu">
@@ -116,7 +117,7 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link active dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                 Cetak
                                 </a>
                                 <div class="dropdown-menu">

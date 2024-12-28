@@ -10,6 +10,9 @@
                     
                     <form method="POST" action="{{route('ruang.simpan')}}">
                         @csrf
+                        <!--Prvious url to redirect after submission-->
+                        <input type='hidden' name='previous_url' value='{{URL::previous()}}' style='width:500px'/>
+                        
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nama ruangan</label>
                             <div class="col-sm-10">

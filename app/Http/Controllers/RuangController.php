@@ -25,7 +25,10 @@ class RuangController extends Controller
             'keterangan' => $request['keterangan']
         ]);
 
-        return redirect()->route('ruang.index');
+        //return redirect()->route('ruang.index');
+        $previous_url = $request['previous_url'];
+
+        return redirect($previous_url)->with('success', 'Data saved successfully!');
     }
 
     public function edit($id){
