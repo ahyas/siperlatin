@@ -7,20 +7,26 @@
             <div class="card">
                 <div class="card-header">Laporan transaksi perawatan barang</div>
                 <div class="card-body">
-
+                    @if(isset($err))
+                        @if($err !== null)
+                            <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Error!</strong> {{$err}}
+                            </div>
+                        @endif
+                    @endif
+                    <p>Masukan tanggal periode transaksi</p>
                     <form class="form-inline" method="GET" action="{{route('laporan.transaksi.cari')}}">
                         @csrf
                     <div class="form-group mx-sm-3 mb-2">
-                        <label for="inputPassword2" class="sr-only">Password</label>
                         <input type="text" class="form-control" placeholder="Dari tanggal" name="dari_tanggal" id="dari_tanggal" value="{{ old('dari_tanggal', request()->input('dari_tanggal'))}}">
                     </div>
                     <div class="form-group mx-sm-3 mb-2">
-                        <label for="inputPassword2" class="sr-only">Password</label>
                         <input type="text" class="form-control" placeholder="Sampai tanggal" name="sampai_tanggal" id="sampai_tanggal" value="{{ old('sampai_tanggal', request()->input('sampai_tanggal'))}}">
                     </div>
                     <button type="submit" class="btn btn-primary mb-2" id="cari">Cari</button>
                     
-                    @if(isset($dari_tgl) || isset($sampai_tgl))
+                    @if(isset($dari_tgl) && isset($sampai_tgl))
                         <a href="{{route('laporan.transaksi.index')}}" class="btn btn-success mb-2" role="button" style="margin-left:15px" >Semua</a>
                         <a href="{{route('laporan.transaksi.print', ['dari_tgl'=>$dari_tgl,'sampai_tgl'=>$sampai_tgl])}}" class="btn btn-danger mb-2" role="button" target="_blank" style="margin-left:15px">Print</a>
                     @else
@@ -29,11 +35,9 @@
                     
                     </form>
 
-                    
-                    
-
+                    @if(isset($dari_tgl) && isset($sampai_tgl))
                     <div class="table-responsive">
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped table-sm" style="margin-top:10px;">
                         <tr>
                             <th width="150px">Kode transaksi</th>
                             <th>Keterangan</th>
@@ -66,6 +70,11 @@
                 
                     {{ $table->links() }}
                 </div>
+                @else
+                <div class="alert alert-warning" style="margin-top:10px">
+                    Masukan periode tanggal transaksi untuk menampilkan daftar transaksi perawatan.
+                </div>
+                @endif
                 </div>
             </div>
         </div>

@@ -106,6 +106,7 @@
                                     <a class="dropdown-item" href="{{route('kondisi_barang.index')}}">Kondisi barang</a>
                                     <a class="dropdown-item" href="{{route('ruang.index')}}">Daftar Ruang</a>
                                     <a class="dropdown-item" href="{{route('brand.index')}}">Daftar Brand / Merk</a>
+                                    <a class="dropdown-item" href="{{route('kuasa_pengguna_barang.index')}}">Kuasa Pengguna Barang</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

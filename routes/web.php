@@ -70,6 +70,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('brand/{id}/update', 'BrandController@update')->name('brand.update');
     Route::get('brand/{id}/destroy', 'BrandController@destroy')->name('brand.destroy');
 
+    Route::get('kuasa_pengguna_barang', 'KuasaPenggunaBarangController@index')->name('kuasa_pengguna_barang.index');
+    Route::get('kuasa_pengguna_barang/tambah', 'KuasaPenggunaBarangController@tambah')->name('kuasa_pengguna_barang.tambah');
+    Route::post('kuasa_pengguna_barang/simpan', 'KuasaPenggunaBarangController@simpan')->name('kuasa_pengguna_barang.simpan');
+    Route::get('kuasa_pengguna_barang/{id}/edit', 'KuasaPenggunaBarangController@edit')->name('kuasa_pengguna_barang.edit');
+    Route::post('kuasa_pengguna_barang/{id}/update', 'KuasaPenggunaBarangController@update')->name('kuasa_pengguna_barang.update');
+
     Route::get("satuan_barang", "SatuanBarangController@index")->name("satuan_barang.index");
     Route::get("satuan_barang/tambah", "SatuanBarangController@tambah")->name("satuan_barang.tambah");
     Route::post("satuan_barang/simpan", "SatuanBarangController@simpan")->name("satuan_barang.simpan");

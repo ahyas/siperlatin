@@ -40,12 +40,14 @@ class TransaksiPerawatanController extends Controller
             "tb_detail_barang.tgl_perolehan",
             "tb_detail_barang.id_kondisi_barang",
             "tb_kondisi_barang.nama AS kondisi_barang",
+            "tb_brand.nama_brand AS brand",
             "tb_satuan_barang.nama_satuan",
             "tb_ruang.nama_ruang")
         ->join("tb_barang", "tb_detail_barang.id_barang","=","tb_barang.id")
         ->leftJoin('tb_ruang', 'tb_detail_barang.ruang', '=','tb_ruang.id')
         ->leftJoin('tb_kondisi_barang', 'tb_detail_barang.id_kondisi_barang', '=','tb_kondisi_barang.id')
         ->leftJoin('tb_satuan_barang', 'tb_detail_barang.satuan', '=','tb_satuan_barang.id')
+        ->leftJoin('tb_brand', 'tb_detail_barang.brand', '=','tb_brand.id')
         ->first();
 
         $transaksi = DB::table("tb_transaksi")
@@ -94,7 +96,7 @@ class TransaksiPerawatanController extends Controller
             "nominal"=>$request->nominal,
             "file_name"=>$fileName
         ]);
-        return redirect()->route("transaksi_perawatan.detail",["id_detail_barang"=>$id_detail_barang]);
+        return redirect()->route("transaksi_perawatan.detail",["id_detail_barang"=>$id_detail_barang])->with('success','Data successfuly saved');;
     }
 
     public function edit($id_transaksi, $id_detail_barang){
@@ -144,8 +146,6 @@ class TransaksiPerawatanController extends Controller
             DB::table("tb_transaksi")
             ->where("id",$id_transaksi)
             ->update([
-                "id_barang"=>$request->barang,
-                "id_sub_barang"=>$id_detail_barang,
                 "tanggal"=>$request->tanggal,
                 "keterangan"=>$request->keterangan,
                 "nominal"=>$request->nominal,
@@ -155,15 +155,13 @@ class TransaksiPerawatanController extends Controller
             DB::table("tb_transaksi")
             ->where("id",$id_transaksi)
             ->update([
-                "id_barang"=>$request->barang,
-                "id_sub_barang"=>$request->sub_barang,
                 "tanggal"=>$request->tanggal,
                 "keterangan"=>$request->keterangan,
                 "nominal"=>$request->nominal
             ]);
         }
 
-        return redirect()->route("transaksi_perawatan.detail",["id_detail_barang"=>$id_detail_barang]);
+        return redirect()->route("transaksi_perawatan.detail",["id_detail_barang"=>$id_detail_barang])->with('success','Data successfuly updated');;
     }
 
     public function delete($id_transaksi, $id_detail_barang){
@@ -185,7 +183,7 @@ class TransaksiPerawatanController extends Controller
         ->where("id",$id_transaksi)
         ->delete();
 
-        return redirect()->route("transaksi_perawatan.detail", ["id_detail_barang"=>$id_detail_barang]);
+        return redirect()->route("transaksi_perawatan.detail", ["id_detail_barang"=>$id_detail_barang])->with('success','Data successfuly deleted');
     }
 
     public function get_sub_barang(Request $request){

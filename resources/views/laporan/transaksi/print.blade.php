@@ -21,13 +21,13 @@
         <tr>
             <td width="25%" align="left"><img id="logo" src="{{public_path('images/logo.png')}}" width="80px"></td>
             <td width="75%"> <h5 style="text-align:center;">PENGADILAN TINGGI AGAMA PAPUA BARAT</h5>
-                <h6 style="text-align:center">LAPORAN TRANSAKSI PERAWATAN BARANG</h6>
-                <p style="text-align:center;">Dari tanggal: {{$dari_tgl}} - Sampai tanggal: {{$sampai_tgl}}</p>
+                <h6 style="text-align:center;">LAPORAN TRANSAKSI PERAWATAN BARANG</h6>
+                <p style="text-align:center; font-size:13px;">Dari tanggal: {{$dari_tgl}} - Sampai tanggal: {{$sampai_tgl}}</p>
             </td>
         
         </tr>
         </table>
-        <hr>
+        <hr style='height:1.5px; color:333'>
 
     <table class="table table-striped table-sm table-bordered" style="width:100%; font-size:13px; margin-top:15px;">
         <tr>
@@ -58,13 +58,13 @@
         </tr>
     </table>
 
-    <article class="box"> 
+    <article class="box" style="font-size:13px;"> 
         <p>Kuasa pengguna barang</p>
         <br>
         <br>
         <br>
-        <p><b>Nurmansyah, S.Ag., M.H</b></p>
-        <p>NIP. 19720510.199703.1.003</p> 
+        <p>{{$kuasa_pengguna_barang->nama}}</p>
+        <p><b>NIP. {{$kuasa_pengguna_barang->nip}}</b></p> 
     </article>
 
     </div>
