@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TransaksiController extends Controller
 {
@@ -26,9 +26,10 @@ class TransaksiController extends Controller
 
         $table=DB::table("tb_transaksi")
         ->whereBetween("tb_transaksi.tanggal", [$dari_tgl, $sampai_tgl])
-        ->select("tb_transaksi.id as kode_transaksi","tb_transaksi.tanggal","tb_transaksi.file_name","tb_transaksi.nominal","tb_transaksi.nominal","tb_transaksi.keterangan","tb_barang.nama as nama_barang", "tb_detail_barang.nama as nama_sub_barang","tb_detail_barang.kode AS kode_detail_barang")
+        ->select("tb_transaksi.id as kode_transaksi","tb_transaksi.tanggal","tb_transaksi.file_name","tb_transaksi.nominal","tb_transaksi.nominal","tb_transaksi.keterangan","tb_barang.nama as nama_barang", "tb_detail_barang.nama as nama_sub_barang","tb_detail_barang.kode AS kode_detail_barang", 'tb_ruang.nama_ruang')
         ->join("tb_barang","tb_transaksi.id_barang","=","tb_barang.id")
         ->join("tb_detail_barang","tb_transaksi.id_sub_barang","=","tb_detail_barang.id")
+        ->leftjoin('tb_ruang', 'tb_detail_barang.ruang', 'tb_ruang.id')
         ->paginate(10);
 
         $total = DB::table("tb_transaksi")
@@ -48,9 +49,10 @@ class TransaksiController extends Controller
 
         $table=DB::table("tb_transaksi")
         ->whereBetween("tb_transaksi.tanggal", [$dari_tgl, $sampai_tgl])
-        ->select("tb_transaksi.id as kode_transaksi","tb_transaksi.tanggal","tb_transaksi.file_name","tb_transaksi.nominal","tb_transaksi.nominal","tb_transaksi.keterangan","tb_barang.nama as nama_barang", "tb_detail_barang.nama as nama_sub_barang","tb_detail_barang.kode AS kode_detail_barang")
+        ->select("tb_transaksi.id as kode_transaksi","tb_transaksi.tanggal","tb_transaksi.file_name","tb_transaksi.nominal","tb_transaksi.nominal","tb_transaksi.keterangan","tb_barang.nama as nama_barang", "tb_detail_barang.nama as nama_sub_barang","tb_detail_barang.kode AS kode_detail_barang", 'tb_ruang.nama_ruang')
         ->join("tb_barang","tb_transaksi.id_barang","=","tb_barang.id")
         ->join("tb_detail_barang","tb_transaksi.id_sub_barang","=","tb_detail_barang.id")
+        ->leftjoin('tb_ruang', 'tb_detail_barang.ruang', 'tb_ruang.id')
         ->paginate(10);
 
         $total = DB::table("tb_transaksi")
@@ -58,10 +60,6 @@ class TransaksiController extends Controller
         ->join("tb_barang","tb_transaksi.id_barang","=","tb_barang.id")
         ->join("tb_detail_barang","tb_transaksi.id_sub_barang","=","tb_detail_barang.id")
         ->sum("tb_transaksi.nominal");
-
-        $barang=DB::table("tb_barang")
-        ->select("nama AS nama_barang","id AS id_barang")
-        ->get();
 
         $kuasa_pengguna_barang = DB::table('tb_kuasa_pengguna_barang')->first();
 

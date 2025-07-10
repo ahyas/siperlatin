@@ -56,6 +56,7 @@
                                     <span><i>Detail transaksi</i></span><br>
                                     <span><b>Barang :</b> {{$row->nama_barang}}</span><br>
                                     <span><b>NUP / Kode sub barang :</b> {{$row->kode_detail_barang}}</span><br>
+                                    <span><b>Ruang :</b> {{$row->nama_ruang}}</span><br>
                                     <span><b>Sub barang :</b> {{$row->nama_sub_barang}}</span>
                                 </td>
                             </tr>
